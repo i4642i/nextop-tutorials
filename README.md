@@ -2,7 +2,7 @@
 
 Step-by-step projects for [nextop](https://pypi.org/project/nextop/), the framework for agentic workers. Each version folder holds the tutorials made for that nextop version, in English, Korean and Japanese; every tutorial pins the nextop it was tested with.
 
-한국어 안내: [README.ko.md](README.ko.md)
+English | [한국어](README.ko.md) | [日本語](README.ja.md)
 
 - Homepage: https://nextop.nextopologix.com
 - YouTube (tutorial videos): https://www.youtube.com/@nextopologix

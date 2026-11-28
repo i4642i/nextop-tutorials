@@ -2,7 +2,7 @@
 
 [nextop](https://pypi.org/project/nextop/)으로 따라 만드는 예제 프로젝트입니다. 버전 폴더마다 그 nextop 버전에 맞춰 만든 튜토리얼이 영어, 한국어, 일본어로 들어 있고, 튜토리얼마다 시험한 nextop 버전이 고정되어 있습니다.
 
-English: [README.md](README.md)
+[English](README.md) | 한국어 | [日本語](README.ja.md)
 
 - 홈페이지: https://nextop.nextopologix.com
 - 유튜브 (튜토리얼 영상): https://www.youtube.com/@nextopologix
