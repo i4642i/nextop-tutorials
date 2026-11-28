@@ -4,6 +4,9 @@ Step-by-step projects for [nextop](https://pypi.org/project/nextop/), the framew
 
 한국어 안내: [README.ko.md](README.ko.md)
 
+- Homepage: https://nextop.nextopologix.com
+- YouTube (tutorial videos): https://www.youtube.com/@nextopologix
+
 | Version | nextop | Tutorials |
 |---|---|---|
 | [`v0.4.0/`](v0.4.0/) | 0.4.0 (`pip install nextop==0.4.0`) | [English](v0.4.0/en/), [Korean](v0.4.0/ko/), [Japanese](v0.4.0/ja/): hair salon booking chat, daily stock outlook mail, PDF to an A4 summary, link summary with MCP servers, PDF to a PowerPoint deck |

@@ -4,6 +4,9 @@
 
 English: [README.md](README.md)
 
+- 홈페이지: https://nextop.nextopologix.com
+- 유튜브 (튜토리얼 영상): https://www.youtube.com/@nextopologix
+
 | 버전 | nextop | 튜토리얼 |
 |---|---|---|
 | [`v0.4.0/`](v0.4.0/) | 0.4.0 (`pip install nextop==0.4.0`) | [한국어](v0.4.0/ko/), [영어](v0.4.0/en/), [일본어](v0.4.0/ja/): 헤어샵 예약 상담, 주가 전망 메일, PDF A4 요약, MCP 서버로 링크 요약, PDF를 PPT로 |
