@@ -1,0 +1,57 @@
+PDF classification: attention_is_all_you_need.pdf (15 pages)
+43 text parts · 4 tables · 2 figures
+
+[Text] 43
+  1. (no title) (page 1) · 173 characters
+  2. Attention Is All You Need (page 1) · 397 characters
+  3. Abstract (page 1) · 2216 characters
+  4. 1 Introduction (page 2) · 1904 characters
+  5. 2 Background (page 2) · 1812 characters
+  6. 3 Model Architecture (page 2) · 489 characters
+  7. 3 Model Architecture (page 3) · 260 characters
+  8. 3.1 Encoder and Decoder Stacks (page 3) · 1316 characters
+  9. 3.2 Attention (page 3) · 201 characters
+  10. 3.2 Attention (page 4) · 49 characters
+  11. 3.2 Attention (page 4) · 268 characters
+  12. 3.2.1 Scaled Dot-Product Attention (page 4) · 1468 characters
+  13. 3.2.2 Multi-Head Attention (page 4) · 638 characters
+  14. 3.2.2 Multi-Head Attention (page 5) · 713 characters
+  15. 3.2.3 Applications of Attention in our Model (page 5) · 1168 characters
+  16. 3.3 Position-wise Feed-Forward Networks (page 5) · 587 characters
+  17. 3.4 Embeddings and Softmax (page 5) · 501 characters
+  18. 3.4 Embeddings and Softmax (page 6) · 285 characters
+  19. 3.5 Positional Encoding (page 6) · 1333 characters
+  20. 4 Why Self-Attention (page 6) · 1522 characters
+  21. 4 Why Self-Attention (page 7) · 1662 characters
+  22. 5 Training (page 7) · 72 characters
+  23. 5.1 Training Data and Batching (page 7) · 625 characters
+  24. 5.2 Hardware and Schedule (page 7) · 427 characters
+  25. 5.3 Optimizer (page 7) · 376 characters
+  26. 5.4 Regularization (page 7) · 57 characters
+  27. 5.4 Regularization (page 8) · 192 characters
+  28. 5.4 Regularization (page 8) · 492 characters
+  29. 6 Results (page 8) · 11 characters
+  30. 6.1 Machine Translation (page 8) · 1668 characters
+  31. 6.2 Model Variations (page 8) · 280 characters
+  32. 6.2 Model Variations (page 9) · 323 characters
+  33. 6.2 Model Variations (page 9) · 974 characters
+  34. 6.3 English Constituency Parsing (page 9) · 1100 characters
+  35. 6.3 English Constituency Parsing (page 10) · 108 characters
+  36. 6.3 English Constituency Parsing (page 10) · 556 characters
+  37. 7 Conclusion (page 10) · 1212 characters
+  38. References (page 10) · 569 characters
+  39. References (page 11) · 3195 characters
+  40. References (page 12) · 3197 characters
+  41. References (page 13) · 379 characters
+  42. References (page 14) · 103 characters
+  43. References (page 15) · 170 characters
+
+[Tables] 4
+  1. Table 1: Maximum path lengths, per-layer complexity and minimum number of sequential operations for different layer types. n is the sequence length, d is the representation dimension, k is the kernel size of convolutions and r the size of the neighborhood in restricted self-attention. (page 6) · 6 rows × 4 columns · columns: Layer Type | Complexity per Layer | Sequential | Maximum Path Length
+  2. Table 2: The Transformer achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French newstest2014 tests at a fraction of the training cost. (page 8) · 13 rows × 5 columns · columns:  | BLEU |  | Training Cost (FLOPs) | 
+  3. Table 3: Variations on the Transformer architecture. Unlisted values are identical to those of the base model. All metrics are on the English-to-German translation development set, newstest2013. Listed perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to per-word perplexities. (page 9) · 26 rows × 13 columns · columns:  |  |  |  |  |  |  |  |  | train | PPL | BLEU | params
+  4. Table 4: The Transformer generalizes well to English constituency parsing (Results are on Section 23 of WSJ) (page 10) · 13 rows × 3 columns · columns: Parser | Training | WSJ 23 F1
+
+[Figures] 2
+  1. Figure 1: The Transformer - model architecture. (page 3) · 911×1343 pixels
+  2. Figure 2: (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several attention layers running in parallel. (page 4) · 1216×769 pixels

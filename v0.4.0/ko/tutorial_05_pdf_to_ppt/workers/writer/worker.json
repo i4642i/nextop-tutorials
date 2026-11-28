@@ -1,0 +1,58 @@
+{
+  "id": "writer",
+  "name": "새롬",
+  "title": "작성 담당",
+  "model": "gpt-5.4-mini",
+  "outputs": [
+    {
+      "name": "writing",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "슬라이드 제목을 한국어로 짧게 씁니다. 표지(cover)는 문서를 한 줄로 소개하는 부제입니다."
+          },
+          "bullets": {
+            "type": "array",
+            "description": "글머리표. 개수는 slide.bullets(최소, 최대)를 따릅니다. 표지, 목차, 구역 표지, 두 단 비교는 빈 목록.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {"type": "string", "description": "화면에 나오는 짧은 한국어 한 문장."},
+                "source": {"type": "string", "description": "근거가 된 문단의 주소. slide.parts[].paragraphs 중 하나."},
+                "quote": {"type": "string", "description": "그 문단에서 근거가 되는 문장을 글자 그대로 옮긴 것."}
+              },
+              "required": ["text", "source", "quote"]
+            }
+          },
+          "columns": {
+            "type": "array",
+            "description": "두 단 비교(comparison)에서만 두 개: 왼쪽 단과 오른쪽 단. 다른 레이아웃은 빈 목록.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "heading": {"type": "string", "description": "단의 제목(견주는 대상의 이름)."},
+                "bullets": {
+                  "type": "array",
+                  "description": "그 단의 글머리표.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "text": {"type": "string", "description": "화면에 나오는 짧은 한국어 한 문장."},
+                      "source": {"type": "string", "description": "근거가 된 문단의 주소. slide.parts[].paragraphs 중 하나."},
+                      "quote": {"type": "string", "description": "그 문단에서 근거가 되는 문장을 글자 그대로 옮긴 것."}
+                    },
+                    "required": ["text", "source", "quote"]
+                  }
+                }
+              },
+              "required": ["heading", "bullets"]
+            }
+          }
+        },
+        "required": ["title", "bullets", "columns"]
+      }
+    }
+  ]
+}

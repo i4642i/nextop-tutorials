@@ -1,0 +1,66 @@
+{
+  "id": "planner",
+  "name": "Harper",
+  "title": "Deck planner",
+  "model": "gpt-5.4-mini",
+  "outputs": [
+    {
+      "name": "outline",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "slides": {
+            "type": "array",
+            "description": "Write the slides in order. There must be exactly brief.slides of them.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "layout": {
+                  "type": "string",
+                  "description": "The layout code: one of cover, agenda, section, bullets, figure, table, comparison, closing."
+                },
+                "topic": {
+                  "type": "string",
+                  "description": "What this slide covers, in one English sentence (a note for the writer; not shown on the slide)."
+                },
+                "parts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "The addresses of the text parts this slide rests on (report.sections[].address). For a section cut into several pieces, one piece is enough (the program adds all its pieces). A table or figure slide: one or more of that table's or figure's text_parts. The cover: the one text part with the document's title; the agenda and section slides: an empty list."
+                },
+                "table": {
+                  "type": "string",
+                  "description": "The address of the table on a table slide (report.tables[].address). An empty string for every other layout."
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "description": "The numbers of the table rows to show. The header rows (row 1 and the rows right under it with no number) are always shown. Empty shows every row. An empty list when it is not a table slide."
+                },
+                "figure": {
+                  "type": "string",
+                  "description": "The address of the figure on a figure slide (report.figures[].address). An empty string for every other layout."
+                }
+              },
+              "required": [
+                "layout",
+                "topic",
+                "parts",
+                "table",
+                "rows",
+                "figure"
+              ]
+            }
+          }
+        },
+        "required": [
+          "slides"
+        ]
+      }
+    }
+  ]
+}

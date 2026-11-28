@@ -1,0 +1,7 @@
+.env
+runs/
+outlooks/
+__pycache__/
+.pytest_cache/
+file_servers/*/store/
+search_problems.json

@@ -1,0 +1,5 @@
+{
+  "blocks": [{"id": "seed_bookings", "type": "function", "function": "seed_bookings"}],
+  "lines": [],
+  "layout": {"seed_bookings": {"x": 40, "y": 140}}
+}

@@ -1,0 +1,44 @@
+{
+  "note": "The four companies. query: what the search tool looks for. listed false (a company with no share price): the outlook is news mood only.",
+  "companies": [
+    {
+      "name": "삼성전자",
+      "ticker": "005930 (KOSPI)",
+      "listed": true,
+      "query": "삼성전자 주가 실적 반도체"
+    },
+    {
+      "name": "SK하이닉스",
+      "ticker": "000660 (KOSPI)",
+      "listed": true,
+      "query": "SK하이닉스 주가 HBM 실적"
+    },
+    {
+      "name": "NVIDIA",
+      "ticker": "NVDA (NASDAQ)",
+      "listed": true,
+      "query": "NVIDIA stock news AI chips"
+    },
+    {
+      "name": "SpaceX",
+      "ticker": "SPCX (NASDAQ)",
+      "listed": true,
+      "query": "SpaceX SPCX stock Starship Starlink"
+    }
+  ],
+  "search": {
+    "days": 3,
+    "max_results": 6,
+    "exclude_domains": [
+      "instagram.com",
+      "facebook.com",
+      "x.com",
+      "twitter.com",
+      "youtube.com",
+      "reddit.com",
+      "tiktok.com",
+      "threads.net",
+      "tavily.com"
+    ]
+  }
+}

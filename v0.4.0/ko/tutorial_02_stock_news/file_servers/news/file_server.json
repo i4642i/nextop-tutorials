@@ -1,0 +1,10 @@
+{
+  "name": "news",
+  "description": "news articles about the four companies, one file per article (title, date, address of the page, text), tagged with the company name",
+  "lifetime": "project",
+  "expire_after": "7d",
+  "shares": [
+    {"from": "collector", "to": ["analyst"]},
+    {"from": "analyst", "to": ["mail_outlook"]}
+  ]
+}

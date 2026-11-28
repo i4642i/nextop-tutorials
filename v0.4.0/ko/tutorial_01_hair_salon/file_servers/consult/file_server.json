@@ -1,0 +1,27 @@
+{
+  "name": "consult",
+  "description": "상담 중에 기록한 것: 손님의 용건(purpose_<id>, 진행 중이거나 끝남)과 체크리스트 답(항목마다 한 줄, 손님이 한 말에 가깝게). 같은 항목을 다시 쓰면 그 줄이 바뀌고 예전 값은 이력에 남습니다. 손님마다 따로 보이고, 상담이 끝나면 흐름(chat_end)이 지우며, 남은 줄도 하루가 지나면 지워집니다",
+  "lifetime": "project",
+  "expire_after": "1d",
+  "access": {
+    "reception": {
+      "write": true,
+      "read": "subject",
+      "show": 2
+    },
+    "close_chat": {
+      "read": "subject",
+      "delete": true
+    },
+    "person:owner": {
+      "read": "all",
+      "delete": true
+    }
+  },
+  "shares": [
+    {
+      "from": "reception",
+      "to": []
+    }
+  ]
+}

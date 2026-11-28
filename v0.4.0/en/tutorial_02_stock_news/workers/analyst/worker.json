@@ -1,0 +1,132 @@
+{
+  "id": "analyst",
+  "name": "Dana",
+  "title": "Stock outlook analyst",
+  "model": "gpt-5.4-mini",
+  "steps": [
+    {
+      "id": "scan",
+      "name": "Scan the news per company",
+      "inputs": [
+        "brief",
+        "coverage"
+      ],
+      "file_servers": [
+        "news"
+      ]
+    },
+    {
+      "id": "judge",
+      "name": "Outlook per company",
+      "for_each": "scan.companies",
+      "inputs": [
+        "brief",
+        "coverage"
+      ],
+      "file_servers": [
+        "news"
+      ],
+      "report": [
+        "scan"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "scan",
+      "schema": {
+        "type": "object",
+        "step": "scan",
+        "properties": {
+          "companies": {
+            "type": "array",
+            "description": "Write one entry for every company, in the order of the brief.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "type": "string",
+                  "key": true,
+                  "description": "Write the company's name exactly as the brief has it."
+                },
+                "focus": {
+                  "type": "string",
+                  "description": "Write in one sentence what the company's recent articles talk about most."
+                }
+              },
+              "required": [
+                "company",
+                "focus"
+              ]
+            }
+          }
+        },
+        "required": [
+          "companies"
+        ]
+      }
+    },
+    {
+      "name": "outlook",
+      "schema": {
+        "type": "object",
+        "step": "judge",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "Write one entry for every company.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "type": "string",
+                  "key": true,
+                  "description": "Write the name of the company the outlook is for, exactly as given."
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": [
+                    "up",
+                    "flat",
+                    "down"
+                  ],
+                  "description": "Choose the direction for the next trading day: up, flat or down."
+                },
+                "reasons": {
+                  "type": "array",
+                  "maxItems": 3,
+                  "description": "Write the reasons behind the direction.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "point": {
+                        "type": "string",
+                        "description": "Write the reason in one sentence."
+                      },
+                      "source": {
+                        "type": "string",
+                        "description": "Write the address of the article paragraph that shows the reason (an address with a #, like fs://news/003#1.2)."
+                      }
+                    },
+                    "required": [
+                      "point",
+                      "source"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "company",
+                "direction",
+                "reasons"
+              ]
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      }
+    }
+  ]
+}

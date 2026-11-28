@@ -1,0 +1,6 @@
+{
+  "name": "shop_info",
+  "description": "the salon's guide: services, designers, opening hours, parking, cancellation and payment",
+  "lifetime": "project",
+  "shares": [{"from": "documents", "to": ["reception"]}]
+}

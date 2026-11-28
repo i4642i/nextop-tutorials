@@ -1,0 +1,22 @@
+{
+  "format": 1,
+  "name": "pdf to ppt",
+  "language": "ja",
+  "nextop": ">=0.4,<0.5",
+  "defaults": {
+    "parallel": 1,
+    "max_calls": 20
+  },
+  "adapters": {
+    "llm": {
+      "default": {
+        "class": "nextop.adapters.openai_compat:OpenAICompatLLM",
+        "options": {
+          "base_url": "https://api.openai.com/v1",
+          "key_env": "LLM_API_KEY",
+          "env_file": ".env"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "pdf",
+  "description": "the PDF to summarize: one record with its text, table and figure parts in document order, with pages",
+  "lifetime": "run",
+  "shares": [
+    {"from": "intake", "to": ["classify", "summarizer"]}
+  ]
+}

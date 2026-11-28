@@ -1,0 +1,57 @@
+PDF 분류 결과: attention_is_all_you_need.pdf (15쪽)
+글 43개 · 표 4개 · 그림 2개
+
+[글] 43개
+  1. Provided proper attribution is provided, Google hereby grant (쪽 1) · 173자
+  2. Attention Is All You Need (쪽 1) · 431자
+  3. Abstract (쪽 1) · 2233자
+  4. 1 Introduction (쪽 2) · 1929자
+  5. 2 Background (쪽 2) · 1835자
+  6. 3 Model Architecture (쪽 2) · 516자
+  7. 3 Model Architecture (쪽 3) · 262자
+  8. 3.1 Encoder and Decoder Stacks (쪽 3) · 1353자
+  9. 3.2 Attention (쪽 3) · 221자
+  10. 3.2 Attention (쪽 4) · 49자
+  11. 3.2 Attention (쪽 4) · 270자
+  12. 3.2.1 Scaled Dot-Product Attention (쪽 4) · 1515자
+  13. 3.2.2 Multi-Head Attention (쪽 4) · 673자
+  14. 3.2.2 Multi-Head Attention (쪽 5) · 723자
+  15. 3.2.3 Applications of Attention in our Model (쪽 5) · 1219자
+  16. 3.3 Position-wise Feed-Forward Networks (쪽 5) · 635자
+  17. 3.4 Embeddings and Softmax (쪽 5) · 534자
+  18. 3.4 Embeddings and Softmax (쪽 6) · 285자
+  19. 3.5 Positional Encoding (쪽 6) · 1371자
+  20. 4 Why Self-Attention (쪽 6) · 1555자
+  21. 4 Why Self-Attention (쪽 7) · 1666자
+  22. 5 Training (쪽 7) · 73자
+  23. 5.1 Training Data and Batching (쪽 7) · 626자
+  24. 5.2 Hardware and Schedule (쪽 7) · 428자
+  25. 5.3 Optimizer (쪽 7) · 398자
+  26. 5.4 Regularization (쪽 7) · 82자
+  27. 5.4 Regularization (쪽 8) · 192자
+  28. 5.4 Regularization (쪽 8) · 494자
+  29. 6 Results (쪽 8) · 12자
+  30. 6.1 Machine Translation (쪽 8) · 1702자
+  31. 6.2 Model Variations (쪽 8) · 309자
+  32. 6.2 Model Variations (쪽 9) · 323자
+  33. 6.2 Model Variations (쪽 9) · 978자
+  34. 6.3 English Constituency Parsing (쪽 9) · 1143자
+  35. 6.3 English Constituency Parsing (쪽 10) · 108자
+  36. 6.3 English Constituency Parsing (쪽 10) · 560자
+  37. 7 Conclusion (쪽 10) · 1237자
+  38. References (쪽 10) · 592자
+  39. References (쪽 11) · 3235자
+  40. References (쪽 12) · 3229자
+  41. References (쪽 13) · 381자
+  42. References (쪽 14) · 105자
+  43. References (쪽 15) · 174자
+
+[표] 4개
+  1. Table 1: Maximum path lengths, per-layer complexity and minimum number of sequential operations for different layer types. n is the sequence length, d is the representation dimension, k is the kernel size of convolutions and r the size of the neighborhood in restricted self-attention. (쪽 6) · 6행 × 4열 · 열: Layer Type | Complexity per Layer | Sequential | Maximum Path Length
+  2. Table 2: The Transformer achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French newstest2014 tests at a fraction of the training cost. (쪽 8) · 13행 × 5열 · 열:  | BLEU |  | Training Cost (FLOPs) | 
+  3. Table 3: Variations on the Transformer architecture. Unlisted values are identical to those of the base model. All metrics are on the English-to-German translation development set, newstest2013. Listed perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to per-word perplexities. (쪽 9) · 26행 × 13열 · 열:  |  |  |  |  |  |  |  |  | train | PPL | BLEU | params
+  4. Table 4: The Transformer generalizes well to English constituency parsing (Results are on Section 23 of WSJ) (쪽 10) · 13행 × 3열 · 열: Parser | Training | WSJ 23 F1
+
+[그림] 2개
+  1. Figure 1: The Transformer - model architecture. (쪽 3) · 911×1343 픽셀
+  2. Figure 2: (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several attention layers running in parallel. (쪽 4) · 1216×769 픽셀

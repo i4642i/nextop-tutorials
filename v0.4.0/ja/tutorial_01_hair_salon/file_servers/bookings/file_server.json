@@ -1,0 +1,35 @@
+{
+  "name": "bookings",
+  "description": "サロンの予約の記録: 予約ごとに一行（日付、時間、スタイリスト、メニュー、料金、状態、お名前、携帯電話番号）。状態は pending（承認待ち）、confirmed（確定）、declined（スタイリストがお断り）、cancelled（キャンセル）です。受付のツールとフローの関数が読み書きします。受付のモデルはこのサーバーを直接見られず（共通ツールなし、入力にもない）、ツールがご本人確認（お名前と携帯電話番号が合う）のできたお客様の予約だけを伝えます",
+  "lifetime": "project",
+  "access": {
+    "reception": {
+      "read": "all",
+      "write": true,
+      "show": 1
+    },
+    "decide_booking": {
+      "read": "all",
+      "write": true
+    },
+    "seed_bookings": {
+      "read": "all",
+      "write": true
+    },
+    "load_visit": {
+      "read": "all"
+    },
+    "person:owner": {
+      "read": "all",
+      "write": true,
+      "delete": true
+    }
+  },
+  "shares": [
+    {
+      "from": "reception",
+      "to": []
+    }
+  ],
+  "per_subject": false
+}

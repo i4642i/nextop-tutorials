@@ -1,0 +1,32 @@
+{
+  "id": "writer",
+  "name": "カイ",
+  "title": "まとめ担当",
+  "model": "gpt-5.4-mini",
+  "tools": [
+    "time__get_current_time",
+    "filesystem__write_file"
+  ],
+  "outputs": [
+    {
+      "name": "report",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "保存したファイルの名前。依頼の report_file をそのまま書いてください。"
+          },
+          "headline": {
+            "type": "string",
+            "description": "要約全体を日本語の1文（40字前後）で書いてください。メールの件名になります。"
+          }
+        },
+        "required": [
+          "file",
+          "headline"
+        ]
+      }
+    }
+  ]
+}

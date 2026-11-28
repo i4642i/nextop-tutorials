@@ -1,0 +1,96 @@
+{
+  "_note": "Made-up salon. Prices in won, minutes per visit. Weekdays: 0 = Monday ... 6 = Sunday. Designer e-mails are placeholders (example.com). Each service has a menu (styles: name, price, minutes; group is only for the owner reading this file, never shown to customers) and a checklist: what the salon needs to know before the visit (required ones block the booking); the label is the words of the step notice. The customer picks one style per service (the consult item style); a service whose menu has one style takes it without asking. recommend: the style value a customer gives who does not know and wants a suggestion. The other consult checklists (name, phone, style, time, change, cancel ...) are in checklists.json.",
+  "name": "살롱 하루",
+  "slot_minutes": 30,
+  "designers": {
+    "jisu": {
+      "name": "지수 원장",
+      "email": "jisu@example.com",
+      "days": [1, 2, 3, 4, 5],
+      "open": "10:00",
+      "close": "19:00"
+    },
+    "minho": {
+      "name": "민호 실장",
+      "email": "minho@example.com",
+      "days": [2, 3, 4, 5, 6],
+      "open": "11:00",
+      "close": "20:00"
+    },
+    "seoyeon": {
+      "name": "서연 디자이너",
+      "email": "seoyeon@example.com",
+      "days": [0, 1, 2, 3, 4],
+      "open": "10:00",
+      "close": "19:00"
+    }
+  },
+  "services": {
+    "cut": {
+      "label": "커트",
+      "styles": [
+        {"name": "투블럭", "group": "men", "price": 22000, "minutes": 40},
+        {"name": "댄디컷", "group": "men", "price": 22000, "minutes": 40},
+        {"name": "텍스처 크롭컷", "group": "men", "price": 25000, "minutes": 40},
+        {"name": "리프컷", "group": "men", "price": 25000, "minutes": 50},
+        {"name": "페이드컷", "group": "men", "price": 28000, "minutes": 50},
+        {"name": "버즈컷", "group": "men", "price": 15000, "minutes": 30},
+        {"name": "소프트 멀릿", "group": "men", "price": 28000, "minutes": 50},
+        {"name": "울프컷", "group": "men", "price": 30000, "minutes": 60},
+        {"name": "허쉬컷", "group": "women", "price": 35000, "minutes": 60},
+        {"name": "페이스라인 레이어드컷", "group": "women", "price": 30000, "minutes": 50},
+        {"name": "단발(보브)", "group": "women", "price": 28000, "minutes": 50},
+        {"name": "뱅 보브", "group": "women", "price": 30000, "minutes": 50},
+        {"name": "커튼 뱅", "group": "women", "price": 15000, "minutes": 30},
+        {"name": "레이어드 장발", "group": "women", "price": 35000, "minutes": 60}
+      ],
+      "checklist": [
+        {"id": "cut_bangs", "label": "앞머리를 어떻게 할지", "required": true},
+        {"id": "cut_photo", "label": "참고 사진(있으면)", "required": false}
+      ]
+    },
+    "perm": {
+      "label": "펌",
+      "styles": [
+        {"name": "가일펌", "group": "men", "price": 70000, "minutes": 120},
+        {"name": "쉐도우펌", "group": "men", "price": 60000, "minutes": 90},
+        {"name": "애즈펌", "group": "men", "price": 70000, "minutes": 120},
+        {"name": "다운펌", "group": "men", "price": 30000, "minutes": 60},
+        {"name": "C컬펌", "group": "women", "price": 90000, "minutes": 150},
+        {"name": "S컬펌", "group": "women", "price": 100000, "minutes": 150},
+        {"name": "빌드펌", "group": "women", "price": 110000, "minutes": 180},
+        {"name": "히피펌", "group": "women", "price": 120000, "minutes": 180},
+        {"name": "글램(볼륨) 펌", "group": "women", "price": 110000, "minutes": 180},
+        {"name": "매직 스트레이트", "group": "women", "price": 130000, "minutes": 180}
+      ],
+      "checklist": [
+        {"id": "perm_history", "label": "최근 3개월 안의 펌이나 염색", "required": true},
+        {"id": "perm_damage", "label": "요즘 머릿결 상태", "required": true}
+      ]
+    },
+    "color": {
+      "label": "염색",
+      "styles": [
+        {"name": "전체 염색", "group": "common", "price": 70000, "minutes": 120},
+        {"name": "뿌리 염색", "group": "common", "price": 50000, "minutes": 90},
+        {"name": "탈색", "group": "common", "price": 90000, "minutes": 150}
+      ],
+      "checklist": [
+        {"id": "color_want", "label": "원하는 색과 밝기", "required": true},
+        {"id": "color_bleach", "label": "탈색 이력", "required": true},
+        {"id": "color_last", "label": "가장 최근 염색", "required": true},
+        {"id": "color_allergy", "label": "염색약 알레르기나 두피 예민", "required": true}
+      ]
+    },
+    "clinic": {
+      "label": "클리닉",
+      "styles": [
+        {"name": "클리닉", "group": "common", "price": 40000, "minutes": 40}
+      ],
+      "checklist": [
+        {"id": "clinic_concern", "label": "머릿결에서 가장 신경 쓰이는 것", "required": true}
+      ]
+    }
+  },
+  "recommend": "추천"
+}

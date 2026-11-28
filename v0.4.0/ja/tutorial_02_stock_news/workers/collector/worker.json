@@ -1,0 +1,53 @@
+{
+  "id": "collector",
+  "name": "アオイ",
+  "title": "ニュース収集担当",
+  "model": "gpt-5.4-mini",
+  "tools": [
+    "news_search"
+  ],
+  "outputs": [
+    {
+      "name": "coverage",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "計画にあるすべての会社について、同じ順番で一つずつ書きます。",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "type": "string",
+                  "description": "計画にある会社名をそのまま書きます。"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "ok",
+                    "thin",
+                    "none"
+                  ],
+                  "description": "その会社の記事が2本以上保存されていれば ok、1本なら thin、1本もなければ none と書きます。"
+                },
+                "note": {
+                  "type": "string",
+                  "description": "集めたニュースが何についてのものか、または何も残さなかった理由を一文で書きます。"
+                }
+              },
+              "required": [
+                "company",
+                "status",
+                "note"
+              ]
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+.env
+runs/
+__pycache__/
+.pytest_cache/
+file_servers/*/store/
+samples/*.pdf
+input/*.pdf
+output/

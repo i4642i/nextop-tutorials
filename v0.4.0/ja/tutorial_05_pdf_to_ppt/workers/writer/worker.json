@@ -1,0 +1,94 @@
+{
+  "id": "writer",
+  "name": "しおり",
+  "title": "スライド文担当",
+  "model": "gpt-5.4-mini",
+  "outputs": [
+    {
+      "name": "writing",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "スライドのタイトルを日本語で短く。表紙（cover）では文書を紹介する一行のサブタイトル。"
+          },
+          "bullets": {
+            "type": "array",
+            "description": "箇条書き。個数は slide.bullets（最小、最大）に従います。表紙、目次、セクション、2 列の比較は空のリスト。",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "スライドに出る短い日本語の一文。"
+                },
+                "source": {
+                  "type": "string",
+                  "description": "根拠になる段落のアドレス。slide.parts[].paragraphs のどれか。"
+                },
+                "quote": {
+                  "type": "string",
+                  "description": "その段落の根拠になる文を、一字一句そのまま写したもの。"
+                }
+              },
+              "required": [
+                "text",
+                "source",
+                "quote"
+              ]
+            }
+          },
+          "columns": {
+            "type": "array",
+            "description": "2 列の比較（comparison）のスライドだけ: ちょうど二つ、左と右の列。ほかのレイアウトは空のリスト。",
+            "items": {
+              "type": "object",
+              "properties": {
+                "heading": {
+                  "type": "string",
+                  "description": "列の見出し（比べるものの名前）。"
+                },
+                "bullets": {
+                  "type": "array",
+                  "description": "列の箇条書き。",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "スライドに出る短い日本語の一文。"
+                      },
+                      "source": {
+                        "type": "string",
+                        "description": "根拠になる段落のアドレス。slide.parts[].paragraphs のどれか。"
+                      },
+                      "quote": {
+                        "type": "string",
+                        "description": "その段落の根拠になる文を、一字一句そのまま写したもの。"
+                      }
+                    },
+                    "required": [
+                      "text",
+                      "source",
+                      "quote"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "heading",
+                "bullets"
+              ]
+            }
+          }
+        },
+        "required": [
+          "title",
+          "bullets",
+          "columns"
+        ]
+      }
+    }
+  ]
+}

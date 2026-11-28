@@ -1,0 +1,66 @@
+{
+  "id": "planner",
+  "name": "みなと",
+  "title": "スライド構成担当",
+  "model": "gpt-5.4-mini",
+  "outputs": [
+    {
+      "name": "outline",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "slides": {
+            "type": "array",
+            "description": "スライドを順に書いてください。ちょうど brief.slides 枚にします。",
+            "items": {
+              "type": "object",
+              "properties": {
+                "layout": {
+                  "type": "string",
+                  "description": "レイアウトのコード: cover、agenda、section、bullets、figure、table、comparison、closing のどれか。"
+                },
+                "topic": {
+                  "type": "string",
+                  "description": "このスライドで扱うことを日本語の一文で（書き手へのメモで、スライドには出ません）。"
+                },
+                "parts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "このスライドの根拠になる本文の部分のアドレス（report.sections[].address）。いくつかに分かれた節は、そのうち一つで足ります（プログラムが pieces をすべて入れます）。表と図のスライドは、その表や図の text_parts のうち一つ以上。表紙は文書のタイトルがある本文の部分一つ、目次とセクションは空のリスト。"
+                },
+                "table": {
+                  "type": "string",
+                  "description": "table のスライドの表のアドレス（report.tables[].address）。ほかのレイアウトは空の文字列。"
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "description": "表示する表の行の番号。見出しの行（1 行目と、そのすぐ下の数字のない行）はいつも表示されます。空にするとすべての行を表示します。table のスライドでなければ空のリスト。"
+                },
+                "figure": {
+                  "type": "string",
+                  "description": "figure のスライドの図のアドレス（report.figures[].address）。ほかのレイアウトは空の文字列。"
+                }
+              },
+              "required": [
+                "layout",
+                "topic",
+                "parts",
+                "table",
+                "rows",
+                "figure"
+              ]
+            }
+          }
+        },
+        "required": [
+          "slides"
+        ]
+      }
+    }
+  ]
+}

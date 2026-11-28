@@ -1,0 +1,61 @@
+{
+  "id": "reader",
+  "name": "ユイ",
+  "title": "読み取り担当",
+  "model": "gpt-5.4-mini",
+  "tools": [
+    "fetch__fetch"
+  ],
+  "outputs": [
+    {
+      "name": "notes",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "pages": {
+            "type": "array",
+            "description": "依頼（request）のページごとに1つずつ、同じ順番で書いてください。",
+            "items": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer",
+                  "description": "依頼（request.pages）のページ番号（page）をそのまま書いてください。アドレスは書きません。プログラムが番号からアドレスを探します。"
+                },
+                "read": {
+                  "type": "boolean",
+                  "description": "ページを読めたら true、読めなかったら false。"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "ページのタイトルをページにあるとおりに書いてください。読めなかったら空の文字列。"
+                },
+                "points": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "ページの要点を日本語の1文ずつで3つ書いてください。読めなかったら空のリスト。"
+                },
+                "problem": {
+                  "type": "string",
+                  "description": "読めなかったら理由を1文で書いてください。読めたら空の文字列。"
+                }
+              },
+              "required": [
+                "page",
+                "read",
+                "title",
+                "points",
+                "problem"
+              ]
+            }
+          }
+        },
+        "required": [
+          "pages"
+        ]
+      }
+    }
+  ]
+}

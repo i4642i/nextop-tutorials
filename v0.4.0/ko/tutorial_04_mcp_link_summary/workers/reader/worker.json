@@ -1,0 +1,51 @@
+{
+  "id": "reader",
+  "name": "누리",
+  "title": "읽기 담당",
+  "model": "gpt-5.4-mini",
+  "tools": [
+    "fetch__fetch"
+  ],
+  "outputs": [
+    {
+      "name": "notes",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "pages": {
+            "type": "array",
+            "description": "요청(request)의 페이지마다 하나씩, 같은 순서로 쓰세요.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer",
+                  "description": "요청(request.pages)의 페이지 번호(page)를 그대로 쓰세요. 주소는 쓰지 않습니다. 프로그램이 번호로 주소를 찾습니다."
+                },
+                "read": {
+                  "type": "boolean",
+                  "description": "페이지를 읽었으면 true, 읽지 못했으면 false."
+                },
+                "title": {
+                  "type": "string",
+                  "description": "페이지의 제목을 페이지에 있는 그대로 쓰세요. 읽지 못했으면 빈 글자."
+                },
+                "points": {
+                  "type": "array",
+                  "items": {"type": "string"},
+                  "description": "페이지의 핵심 내용을 한국어 한 문장씩 3개 쓰세요. 읽지 못했으면 빈 목록."
+                },
+                "problem": {
+                  "type": "string",
+                  "description": "읽지 못했으면 이유를 한 문장으로 쓰세요. 읽었으면 빈 글자."
+                }
+              },
+              "required": ["page", "read", "title", "points", "problem"]
+            }
+          }
+        },
+        "required": ["pages"]
+      }
+    }
+  ]
+}

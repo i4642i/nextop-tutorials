@@ -1,0 +1,298 @@
+{
+  "_note": "The consult checklists: what the reception collects for each purpose of a chat. The navigator (workers/reception/navigator.py) compares the recorded consult rows with this file and names the step and the notice; nothing here is in code. A purpose is recorded as a row with item purpose_<id> (words: what the customer asked, state: open or done). Each item has an id (the consult row's item), a label (the words of the notice), required, and optionally choices (the words must be one of them; many: several, comma separated) or menu (the style: menu names of salon.json for the services recorded in the item named there, one per service, comma separated, recorded in the consult field named by field; recommend of salon.json when the customer wants a suggestion) or format (phone: a Korean mobile number; datetime: YYYY-MM-DD HH:MM; name: the name only, without a sentence ending such as 이에요). An item with when applies only when another item has that value. service_items: the per-service questions of salon.json (services.<id>.checklist) join the booking checklist for the services recorded in the item named there. need: why a required item is needed and what cannot go on without it; the step notice names it for the items still missing, so the reception can tell a customer who declines or postpones one.",
+  "purposes": {
+    "info": {
+      "label": "가게 안내",
+      "step": "consult",
+      "goal": "가게 안내 문서(shop_info)에서 찾아 답합니다",
+      "items": []
+    },
+    "booking": {
+      "label": "예약",
+      "step": "booking",
+      "goal": "예약에 필요한 정보를 모두 모으고, 빈 시간 하나에 손님의 동의를 받아 예약합니다",
+      "items": [
+        {
+          "id": "name",
+          "label": "성함",
+          "required": true,
+          "format": "name",
+          "need": "예약을 손님 성함으로 잡고 방문하실 때 확인하는 데 필요합니다. 없으면 상담이 시간 고르기로 넘어갈 수 없습니다."
+        },
+        {
+          "id": "phone",
+          "label": "휴대폰 번호",
+          "required": true,
+          "format": "phone",
+          "need": "확정 문자를 보내고 본인 확인을 하는 데 필요합니다. 없으면 상담이 시간 고르기로 넘어갈 수 없습니다(전화로도 예약할 수 있습니다)."
+        },
+        {
+          "id": "service",
+          "label": "시술",
+          "required": true,
+          "choices": [
+            "cut",
+            "perm",
+            "color",
+            "clinic"
+          ],
+          "many": true,
+          "need": "시술마다 걸리는 시간과 가격이 달라 빈 시간을 찾는 데 필요합니다. 없으면 상담이 시간 고르기로 넘어갈 수 없습니다."
+        },
+        {
+          "id": "style",
+          "label": "스타일",
+          "required": true,
+          "menu": "service",
+          "field": "style",
+          "need": "시술마다 스타일에 따라 가격과 걸리는 시간이 달라 빈 시간을 찾는 데 필요합니다. 없으면 상담이 시간 고르기로 넘어갈 수 없습니다."
+        },
+        {
+          "id": "wish_time",
+          "label": "원하는 날짜와 시간",
+          "required": true,
+          "format": "datetime",
+          "need": "그 시간이 비어 있는지 확인하는 데 필요합니다. 없으면 상담이 예약으로 넘어갈 수 없습니다."
+        },
+        {
+          "id": "designer",
+          "label": "디자이너",
+          "required": false,
+          "choices": [
+            "jisu",
+            "minho",
+            "seoyeon",
+            "any"
+          ]
+        },
+        {
+          "id": "agree",
+          "label": "제안한 시간에 대한 손님의 동의",
+          "required": true,
+          "agreement": true,
+          "after": [
+            "wish_time",
+            "designer"
+          ]
+        }
+      ],
+      "service_items": "service"
+    },
+    "my_booking": {
+      "label": "내 예약 확인",
+      "step": "manage",
+      "goal": "본인 확인 뒤 단계 안내에 있는 이 손님의 예약을 그대로 알려 줍니다",
+      "items": [
+        {
+          "id": "name",
+          "label": "성함",
+          "required": true,
+          "format": "name",
+          "need": "예약 기록과 맞춰 본인인지 확인하는 데 필요합니다. 없으면 예약 내용을 알려 드릴 수 없습니다(전화로도 확인할 수 있습니다)."
+        },
+        {
+          "id": "phone",
+          "label": "휴대폰 번호",
+          "required": true,
+          "format": "phone",
+          "need": "예약 기록과 맞춰 본인인지 확인하는 데 필요합니다. 없으면 예약 내용을 알려 드릴 수 없습니다(전화로도 확인할 수 있습니다)."
+        },
+        {
+          "id": "identity",
+          "label": "본인 확인(기록된 성함과 휴대폰 번호가 예약 기록과 맞는지 프로그램이 맞춰 봄)",
+          "required": true,
+          "computed": true
+        }
+      ]
+    },
+    "change": {
+      "label": "예약 변경이나 취소",
+      "step": "manage",
+      "goal": "본인 확인 뒤 어느 예약을 바꿀지 취소할지 정하고, 손님의 확인을 받아 예약 변경 도구(change_booking)로 처리합니다",
+      "items": [
+        {
+          "id": "name",
+          "label": "성함",
+          "required": true,
+          "format": "name",
+          "need": "예약 기록과 맞춰 본인인지 확인하는 데 필요합니다. 없으면 예약을 바꾸거나 취소할 수 없습니다(전화로도 할 수 있습니다)."
+        },
+        {
+          "id": "phone",
+          "label": "휴대폰 번호",
+          "required": true,
+          "format": "phone",
+          "need": "예약 기록과 맞춰 본인인지 확인하는 데 필요합니다. 없으면 예약을 바꾸거나 취소할 수 없습니다(전화로도 할 수 있습니다)."
+        },
+        {
+          "id": "identity",
+          "label": "본인 확인(기록된 성함과 휴대폰 번호가 예약 기록과 맞는지 프로그램이 맞춰 봄)",
+          "required": true,
+          "computed": true
+        },
+        {
+          "id": "change_booking",
+          "label": "바꿀 예약(단계 안내에 있는 이 손님 예약의 booking 값)",
+          "required": true,
+          "format": "booking",
+          "need": "어느 예약을 바꾸거나 취소할지 정하는 데 필요합니다. 없으면 다음으로 넘어갈 수 없습니다."
+        },
+        {
+          "id": "change_action",
+          "label": "변경인지 취소인지",
+          "required": true,
+          "choices": [
+            "change",
+            "cancel"
+          ],
+          "need": "변경인지 취소인지에 따라 다음에 할 일이 달라집니다. 없으면 다음으로 넘어갈 수 없습니다."
+        },
+        {
+          "id": "change_time",
+          "label": "바꿀 날짜와 시간",
+          "required": true,
+          "format": "datetime",
+          "when": {
+            "change_action": "change"
+          },
+          "need": "바꿀 시간이 비어 있는지 확인하는 데 필요합니다. 없으면 예약을 바꿀 수 없습니다."
+        },
+        {
+          "id": "change_designer",
+          "label": "바꿀 디자이너",
+          "required": false,
+          "choices": [
+            "jisu",
+            "minho",
+            "seoyeon"
+          ],
+          "when": {
+            "change_action": "change"
+          }
+        },
+        {
+          "id": "change_agree",
+          "label": "바꿀 시간에 대한 손님의 동의",
+          "required": true,
+          "agreement": true,
+          "when": {
+            "change_action": "change"
+          },
+          "after": [
+            "change_booking",
+            "change_action",
+            "change_time",
+            "change_designer"
+          ]
+        },
+        {
+          "id": "cancel_reason",
+          "label": "취소 이유",
+          "required": false,
+          "when": {
+            "change_action": "cancel"
+          }
+        },
+        {
+          "id": "cancel_agree",
+          "label": "취소에 대한 손님의 확인",
+          "required": true,
+          "agreement": true,
+          "when": {
+            "change_action": "cancel"
+          },
+          "after": [
+            "change_booking",
+            "change_action"
+          ]
+        }
+      ]
+    },
+    "other": {
+      "label": "그 밖의 용건",
+      "step": "consult",
+      "goal": "무슨 일인지 기록하고, 가게에서 전화로 연락드린다고 안내합니다",
+      "items": [
+        {
+          "id": "other_what",
+          "label": "무슨 일인지",
+          "required": true,
+          "need": "가게에서 연락드릴 때 무슨 일인지 알아야 합니다. 없으면 연락을 남길 수 없습니다."
+        },
+        {
+          "id": "phone",
+          "label": "휴대폰 번호",
+          "required": false,
+          "format": "phone"
+        }
+      ]
+    }
+  },
+  "texts": {
+    "_note": "The sentences of the step notice and of the checks (the navigator and the tools put them together; no sentence is written in code). {x} is filled by the program.",
+    "today": "오늘: {day}",
+    "purposes": "손님의 용건: {list}",
+    "purpose_entry": "{label}(purpose_{id}, {state}: \"{words}\")",
+    "state_open": "진행 중",
+    "state_done": "끝남",
+    "no_purpose": "아직 기록된 용건이 없습니다. 인사하고 무엇을 도와드릴지 묻습니다. 손님이 용건을 말하면 그 용건을 purpose_<id> 줄로 기록합니다(가게 안내 info, 예약 booking, 내 예약 확인 my_booking, 예약 변경이나 취소 change, 그 밖의 용건 other).",
+    "all_done": "진행 중인 용건이 없습니다. 더 도와드릴 일이 있는지 묻고, 없다고 하면 인사로 마무리합니다.",
+    "just_done": "이 질문에서 방금 {label}(purpose_{id})을 처리했습니다. 지금 이 손님의 예약: {lines}. 방금 처리한 결과를 손님에게 그대로 알립니다.",
+    "collect": "{label}: 고객과 대화하며 {label}에 필요한 정보를 수집합니다. 남은 것: {items}. 다음에 물을 것: {next}",
+    "collect_done": "{label}: 필요한 정보가 모두 기록됐습니다.",
+    "optional": "손님이 원할 때만: {items}",
+    "recorded": "기록됨: {items}",
+    "redo": "다시 받아야 함: {items}",
+    "item": "{label}({id})",
+    "item_choices": "{label}({id}: {choices} 가운데{many})",
+    "item_many": ", 여럿이면 쉼표로",
+    "item_phone": "{label}({id}, 010-1234-5678 꼴)",
+    "item_name": "{label}({id}, 이름만, 예: 한지민)",
+    "item_datetime": "{label}({id}, YYYY-MM-DD HH:MM 꼴)",
+    "item_style": "{label}({id}: {field} 칸에 메뉴 이름을 시술마다 하나씩, 여럿이면 쉼표로. {menus}. 손님이 잘 모르겠다거나 추천을 원하면 {recommend})",
+    "item_style_later": "{label}({id}: 시술을 정한 뒤 그 시술의 메뉴에서)",
+    "menu_of": "{service} 메뉴: {names}",
+    "item_value": "{label}={words}",
+    "info_open": "가게 안내 \"{words}\": 가게 안내 문서(shop_info)에서 찾은 내용으로 답하고, 답한 뒤 purpose_info의 state를 done으로 기록합니다.",
+    "other_open": "그 밖의 용건 \"{words}\": 무슨 일인지(other_what) 기록하고, 가게에서 전화로 연락드린다고 안내한 뒤 purpose_other의 state를 done으로 기록합니다.",
+    "next_purposes": "이어서 할 용건: {list}",
+    "slot_free": "{when} {designer}: 비어 있습니다.",
+    "slot_taken": "{when} {designer}: {why}. 빈 시간 도구(find_times)로 그 무렵의 빈 시간을 찾아 디자이너 이름과 함께 하나를 제안하고, 손님이 고른 시간을 {time_id}와 {who_id}에 다시 기록한 뒤 동의를 받습니다.",
+    "slot_no_designer": "{when}: 디자이너가 정해지지 않았습니다. 그 시간에 비어 있는 디자이너: {free}. 한 분을 정해 {who_id}에 기록하고 제안합니다.",
+    "slot_none_free": "{when}: 그 시간에 비어 있는 디자이너가 없습니다. 빈 시간 도구(find_times)로 가까운 빈 시간을 찾아 하나를 제안하고, 손님이 고른 시간을 {time_id}와 {who_id}에 다시 기록한 뒤 동의를 받습니다.",
+    "agree_open": "이 시간을 디자이너 이름과 함께 손님에게 제안하고, 손님이 좋다고 하면 그 말을 {agree_id}에 기록합니다.",
+    "book_now": "손님이 동의했습니다. 예약 도구(book)로 예약합니다.",
+    "change_now": "모두 기록됐고 본인 확인이 됐습니다. 예약 변경 도구(change_booking)로 처리합니다.",
+    "verify_first": "본인 확인이 아직입니다. 손님에게 성함과 휴대폰 번호를 받아 기록하면(name, phone) 프로그램이 예약 기록과 맞춰 봅니다. 본인 확인 전에는 예약이 있는지 없는지도 말하지 않습니다.",
+    "verify_failed": "본인 확인이 되지 않았습니다: 기록된 성함과 휴대폰 번호와 맞는 예약이 없습니다. 예약 내용은 말하지 않고, 성함과 번호를 다시 확인해 달라고 부탁합니다. 다른 손님의 예약이 있는지도 말하지 않습니다.",
+    "verified": "본인 확인이 됐습니다. 이 손님의 예약: {lines}",
+    "my_booking_now": "위 예약을 그대로 알려 주고, 알려 준 뒤 purpose_my_booking의 state를 done으로 기록합니다.",
+    "why_choices": "{choices} 가운데 하나{many}로 적어야 합니다",
+    "why_many": "(여럿이면 쉼표로)",
+    "why_phone": "휴대폰 번호(예: 010-1234-5678)가 아닙니다",
+    "why_name": "이름만 적어야 합니다(예: \"한지민이에요\"라고 하면 한지민)",
+    "why_datetime": "YYYY-MM-DD HH:MM 꼴(예: 2026-11-28 14:00)로 적어야 합니다",
+    "why_booking": "이 손님 예약의 booking 값(단계 안내의 예약 줄 맨 앞)이 아닙니다",
+    "why_style_field": "메뉴 이름을 {field} 칸에 적어야 합니다(words에는 손님이 한 말)",
+    "why_style_service": "시술({service})이 아직 기록되지 않아 스타일을 맞춰 볼 수 없습니다. 손님이 원하는 시술을 {service}에 먼저 기록합니다",
+    "why_style_menu": "{names}은 고른 시술의 메뉴에 없습니다. 메뉴에 있는 이름으로 적습니다: {menus}",
+    "why_style_twice": "{service}에 스타일이 둘입니다({names}). 시술마다 하나만 적습니다",
+    "why_style_missing": "{services}의 스타일이 아직 없습니다: {menus}",
+    "why_recommend": "손님이 스타일 추천을 원합니다. 어떤 느낌을 원하는지 묻고, 그 말에 맞는 두세 가지를 메뉴에서 골라 권합니다. 손님이 고르면 그 이름을 {field} 칸에 다시 기록합니다. {menus}",
+    "why_missing": "아직 기록되지 않았습니다",
+    "why_not_verified": "본인 확인이 되지 않았습니다",
+    "why_agree_stale": "동의한 뒤에 예약, 시간이나 디자이너가 바뀌었습니다. 바뀐 내용에 다시 동의를 받아야 합니다",
+    "why_agree_taken": "동의한 시간이 비어 있지 않습니다",
+    "why_not_working": "{name}은 {weekday}요일에 일하지 않습니다",
+    "why_past": "이미 지난 시간입니다",
+    "why_hours": "{name}의 근무 시간({open}~{close}) 밖입니다",
+    "why_taken": "{name}은 그 시간에 다른 예약이 있습니다",
+    "why_no_designer": "디자이너가 정해지지 않았습니다",
+    "why_none_free": "그 시간에 비어 있는 디자이너가 없습니다",
+    "why_not_active": "이 예약은 이미 {status} 상태라 바꿀 수 없습니다",
+    "cancel_agree_open": "이 예약을 정말 취소할지 손님에게 한 번 확인하고, 손님이 그렇다고 하면 그 말을 cancel_agree에 기록합니다: {line}",
+    "need": "손님이 남은 것을 주지 않겠다거나 나중에 주겠다고 하면, 왜 필요한지와 없으면 다음으로 넘어갈 수 없다는 것을 말합니다: {items}",
+    "need_item": "{label}({id}): {need}",
+    "reply_foreign": "답에 한국어가 아닌 글자가 섞여 있습니다({words}). 한국어로만 다시 씁니다."
+  }
+}

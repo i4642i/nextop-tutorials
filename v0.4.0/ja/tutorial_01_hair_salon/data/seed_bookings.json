@@ -1,0 +1,14 @@
+{
+  "_note": "Existing bookings. nth_workday: 1 = the designer's first working day from tomorrow, 2 = the second, ...; styles: menu names of salon.json, one per service; names and phones are made up",
+  "bookings": [
+    {"designer": "takahashi", "nth_workday": 1, "time": "10:00", "services": ["perm"], "styles": ["ニュアンスパーマ"], "name": "佐藤 美咲", "phone": "090-0000-1001"},
+    {"designer": "takahashi", "nth_workday": 1, "time": "14:00", "services": ["cut"], "styles": ["ツーブロック"], "name": "鈴木 大翔", "phone": "090-0000-1002"},
+    {"designer": "takahashi", "nth_workday": 2, "time": "11:00", "services": ["color"], "styles": ["全体カラー"], "name": "田中 結衣", "phone": "090-0000-1003"},
+    {"designer": "nakamura", "nth_workday": 1, "time": "11:00", "services": ["color"], "styles": ["リタッチカラー"], "name": "伊藤 陽菜", "phone": "090-0000-1004"},
+    {"designer": "nakamura", "nth_workday": 1, "time": "16:00", "services": ["cut"], "styles": ["マッシュ"], "name": "渡辺 蓮", "phone": "090-0000-1005"},
+    {"designer": "nakamura", "nth_workday": 2, "time": "13:00", "services": ["perm"], "styles": ["ツイストスパイラルパーマ"], "name": "山本 湊", "phone": "090-0000-1006"},
+    {"designer": "kobayashi", "nth_workday": 1, "time": "11:00", "services": ["cut"], "styles": ["フェードカット"], "name": "中島 悠真", "phone": "090-0000-1007"},
+    {"designer": "kobayashi", "nth_workday": 1, "time": "14:00", "services": ["treatment"], "styles": ["トリートメント"], "name": "加藤 さくら", "phone": "090-0000-1008"},
+    {"designer": "kobayashi", "nth_workday": 2, "time": "15:00", "services": ["cut", "treatment"], "styles": ["韓国風レイヤーカット", "トリートメント"], "name": "吉田 葵", "phone": "090-0000-1009"}
+  ]
+}

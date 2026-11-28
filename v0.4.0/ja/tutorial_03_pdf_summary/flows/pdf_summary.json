@@ -1,0 +1,22 @@
+{
+  "blocks": [
+    {"id": "intake", "type": "function", "function": "intake"},
+    {"id": "classify", "type": "function", "function": "classify"},
+    {"id": "summarizer", "type": "worker", "worker": "summarizer"},
+    {"id": "deliver", "type": "function", "function": "deliver"}
+  ],
+  "lines": [
+    {"from": "intake.brief", "to": "classify"},
+    {"from": "intake.brief", "to": "summarizer"},
+    {"from": "intake.brief", "to": "deliver"},
+    {"from": "classify.report", "to": "summarizer"},
+    {"from": "classify.report", "to": "deliver"},
+    {"from": "summarizer.summary", "to": "deliver"}
+  ],
+  "layout": {
+    "intake": {"x": 40, "y": 140},
+    "classify": {"x": 300, "y": 60},
+    "summarizer": {"x": 560, "y": 140},
+    "deliver": {"x": 820, "y": 140}
+  }
+}

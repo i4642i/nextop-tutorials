@@ -1,0 +1,14 @@
+{
+  "_note": "Existing bookings. nth_workday: 1 = the designer's first working day from tomorrow, 2 = the second, ...; styles: menu names of salon.json, one per service; phones are made-up US numbers (555-01xx is reserved for fiction)",
+  "bookings": [
+    {"designer": "jordan", "nth_workday": 1, "time": "10:00", "services": ["perm"], "styles": ["Beach wave perm"], "name": "Emily Carter", "phone": "(212) 555-0101"},
+    {"designer": "jordan", "nth_workday": 1, "time": "14:00", "services": ["cut"], "styles": ["Taper fade"], "name": "Noah Williams", "phone": "(212) 555-0102"},
+    {"designer": "jordan", "nth_workday": 2, "time": "11:00", "services": ["color"], "styles": ["All-over color"], "name": "Olivia Brown", "phone": "(212) 555-0103"},
+    {"designer": "maya", "nth_workday": 1, "time": "11:00", "services": ["color"], "styles": ["Root touch-up"], "name": "Ava Martinez", "phone": "(212) 555-0104"},
+    {"designer": "maya", "nth_workday": 1, "time": "16:00", "services": ["cut"], "styles": ["Textured crop"], "name": "Liam Johnson", "phone": "(212) 555-0105"},
+    {"designer": "maya", "nth_workday": 2, "time": "13:00", "services": ["perm"], "styles": ["Texture perm"], "name": "Ethan Davis", "phone": "(212) 555-0106"},
+    {"designer": "alex", "nth_workday": 1, "time": "10:00", "services": ["cut"], "styles": ["Mid fade"], "name": "Mason Miller", "phone": "(212) 555-0107"},
+    {"designer": "alex", "nth_workday": 1, "time": "13:00", "services": ["treatment"], "styles": ["Bond repair treatment"], "name": "Sophia Wilson", "phone": "(212) 555-0108"},
+    {"designer": "alex", "nth_workday": 2, "time": "15:00", "services": ["cut", "treatment"], "styles": ["Long layers", "Bond repair treatment"], "name": "Isabella Moore", "phone": "(212) 555-0109"}
+  ]
+}

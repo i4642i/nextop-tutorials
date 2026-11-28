@@ -1,0 +1,34 @@
+{
+  "blocks": [
+    {"id": "intake", "type": "function", "function": "intake"},
+    {"id": "classify", "type": "function", "function": "classify"},
+    {"id": "planner", "type": "worker", "worker": "planner"},
+    {"id": "split", "type": "split", "function": "split_slides", "parallel": 4, "max_copies": 30},
+    {"id": "writer", "type": "worker", "worker": "writer"},
+    {"id": "gather", "type": "gather"},
+    {"id": "deliver", "type": "function", "function": "deliver"}
+  ],
+  "lines": [
+    {"from": "intake.brief", "to": "classify"},
+    {"from": "intake.brief", "to": "planner"},
+    {"from": "intake.brief", "to": "split"},
+    {"from": "intake.brief", "to": "deliver"},
+    {"from": "classify.report", "to": "planner"},
+    {"from": "classify.report", "to": "split"},
+    {"from": "classify.report", "to": "deliver"},
+    {"from": "planner.outline", "to": "split"},
+    {"from": "planner.outline", "to": "deliver"},
+    {"from": "split.slide", "to": "writer"},
+    {"from": "writer.writing", "to": "gather"},
+    {"from": "gather.gathered", "to": "deliver"}
+  ],
+  "layout": {
+    "intake": {"x": 40, "y": 140},
+    "classify": {"x": 260, "y": 60},
+    "planner": {"x": 480, "y": 140},
+    "split": {"x": 700, "y": 140},
+    "writer": {"x": 900, "y": 140},
+    "gather": {"x": 1100, "y": 140},
+    "deliver": {"x": 1300, "y": 140}
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "id": "summarizer",
+  "name": "하늘",
+  "title": "PDF 요약 담당",
+  "model": "gpt-5.4-mini",
+  "outputs": [
+    {
+      "name": "summary",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "문서의 제목을 문서에 있는 그대로 쓰세요."
+          },
+          "key_points": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 5,
+            "description": "핵심 요점을 3개에서 5개 쓰세요.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "point": {
+                  "type": "string",
+                  "description": "요점을 한 문장으로 쓰세요."
+                },
+                "source": {
+                  "type": "string",
+                  "description": "요점이 나온 문단의 주소(report.sections[].paragraphs, 예: fs://pdf/001#3.2) 또는 표의 주소를 쓰세요."
+                },
+                "quote": {
+                  "type": "string",
+                  "description": "그 문단(또는 표)에서 요점을 보여 주는 문장을 글자 그대로 옮겨 쓰세요."
+                }
+              },
+              "required": [
+                "point",
+                "source",
+                "quote"
+              ]
+            }
+          },
+          "tables": {
+            "type": "array",
+            "maxItems": 2,
+            "description": "요약 쪽에 실을 표를 0개에서 2개까지, 가장 중요한 것만 고르세요. 표가 없거나 쓸 만한 표가 없으면 빈 목록입니다.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "description": "고른 표의 주소를 분류 결과(report.tables[].address)에서 그대로 쓰세요."
+                },
+                "line": {
+                  "type": "string",
+                  "description": "그 표가 무엇을 보여 주는지 한 문장으로 쓰세요."
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "description": "보여 줄 행의 번호(1이 맨 위 제목 행, 제목 행은 늘 나옵니다). 비워 두면 모든 행을 보여 줍니다. 행이 14개보다 많은 표는 가장 중요한 행의 번호만 쓰세요."
+                }
+              },
+              "required": [
+                "source",
+                "line",
+                "rows"
+              ]
+            }
+          },
+          "figures": {
+            "type": "array",
+            "maxItems": 2,
+            "description": "요약 쪽에 실을 그림을 0개에서 2개까지, 가장 중요한 것만 고르세요. 그림이 없으면 빈 목록입니다.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "figure": {
+                  "type": "string",
+                  "description": "고른 그림의 주소를 분류 결과(report.figures[].address)에서 그대로 쓰세요."
+                },
+                "line": {
+                  "type": "string",
+                  "description": "그림이 무엇을 보여 주는지 한 문장으로 쓰세요. 그림의 설명 글(캡션)과 가까운 글에 있는 내용만 쓰세요."
+                }
+              },
+              "required": [
+                "figure",
+                "line"
+              ]
+            }
+          },
+          "conclusion": {
+            "type": "string",
+            "description": "문서의 결론을 한두 문장으로 쓰세요."
+          }
+        },
+        "required": [
+          "title",
+          "key_points",
+          "tables",
+          "figures",
+          "conclusion"
+        ]
+      }
+    }
+  ]
+}

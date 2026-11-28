@@ -1,0 +1,132 @@
+{
+  "id": "analyst",
+  "name": "レン",
+  "title": "株価見通しアナリスト",
+  "model": "gpt-5.4-mini",
+  "steps": [
+    {
+      "id": "scan",
+      "name": "会社ごとのニュースの下見",
+      "inputs": [
+        "brief",
+        "coverage"
+      ],
+      "file_servers": [
+        "news"
+      ]
+    },
+    {
+      "id": "judge",
+      "name": "会社ごとの見通し",
+      "for_each": "scan.companies",
+      "inputs": [
+        "brief",
+        "coverage"
+      ],
+      "file_servers": [
+        "news"
+      ],
+      "report": [
+        "scan"
+      ]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "scan",
+      "schema": {
+        "type": "object",
+        "step": "scan",
+        "properties": {
+          "companies": {
+            "type": "array",
+            "description": "計画の順番で、すべての会社について一つずつ書きます。",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "type": "string",
+                  "key": true,
+                  "description": "計画にある会社名をそのまま書きます。"
+                },
+                "focus": {
+                  "type": "string",
+                  "description": "その会社の最近の記事がいちばん多く伝えていることを一文で書きます。"
+                }
+              },
+              "required": [
+                "company",
+                "focus"
+              ]
+            }
+          }
+        },
+        "required": [
+          "companies"
+        ]
+      }
+    },
+    {
+      "name": "outlook",
+      "schema": {
+        "type": "object",
+        "step": "judge",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "すべての会社について一つずつ書きます。",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "type": "string",
+                  "key": true,
+                  "description": "見通しの対象の会社名を、与えられたとおりに書きます。"
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": [
+                    "up",
+                    "flat",
+                    "down"
+                  ],
+                  "description": "次の取引日の方向を up、flat、down から選びます。"
+                },
+                "reasons": {
+                  "type": "array",
+                  "maxItems": 3,
+                  "description": "方向の根拠となる理由を書きます。",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "point": {
+                        "type": "string",
+                        "description": "理由を一文で書きます。"
+                      },
+                      "source": {
+                        "type": "string",
+                        "description": "理由を示す記事の段落のアドレス（fs://news/003#1.2 のように # が付いたアドレス）を書きます。"
+                      }
+                    },
+                    "required": [
+                      "point",
+                      "source"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "company",
+                "direction",
+                "reasons"
+              ]
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      }
+    }
+  ]
+}

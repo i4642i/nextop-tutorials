@@ -1,0 +1,298 @@
+{
+  "_note": "The consult checklists: what the reception collects for each purpose of a chat. The navigator (workers/reception/navigator.py) compares the recorded consult rows with this file and names the step and the notice; nothing here is in code. A purpose is recorded as a row with item purpose_<id> (words: what the customer asked, state: open or done). Each item has an id (the consult row's item), a label (the words of the notice), required, and optionally choices (the words must be one of them; many: several, comma separated) or menu (the style: menu names of salon.json for the services recorded in the item named there, one per service, comma separated, recorded in the consult field named by field; recommend of salon.json when the customer wants a suggestion) or format (phone: a US phone number, read by nextop's phone field type; datetime: YYYY-MM-DD HH:MM; name: the name only, not a sentence such as I'm Emma). An item with when applies only when another item has that value. service_items: the per-service questions of salon.json (services.<id>.checklist) join the booking checklist for the services recorded in the item named there. need: why a required item is needed and what cannot go on without it; the step notice names it for the items still missing, so the reception can tell a customer who declines or postpones one.",
+  "purposes": {
+    "info": {
+      "label": "salon info",
+      "step": "consult",
+      "goal": "Find the answer in the salon guide (shop_info) and give it",
+      "items": []
+    },
+    "booking": {
+      "label": "booking",
+      "step": "booking",
+      "goal": "Collect everything a booking needs, get the customer's agreement to one free time and book it",
+      "items": [
+        {
+          "id": "name",
+          "label": "name",
+          "required": true,
+          "format": "name",
+          "need": "The booking is made under the customer's name, and we check it when they arrive. Without it the consultation cannot go on to picking a time."
+        },
+        {
+          "id": "phone",
+          "label": "mobile number",
+          "required": true,
+          "format": "phone",
+          "need": "We text the confirmation to it, and it is how we check who the customer is later. Without it the consultation cannot go on to picking a time (booking by phone works too)."
+        },
+        {
+          "id": "service",
+          "label": "service",
+          "required": true,
+          "choices": [
+            "cut",
+            "perm",
+            "color",
+            "treatment"
+          ],
+          "many": true,
+          "need": "Each service takes a different time and price, so it is needed to find a free time. Without it the consultation cannot go on to picking a time."
+        },
+        {
+          "id": "style",
+          "label": "style",
+          "required": true,
+          "menu": "service",
+          "field": "style",
+          "need": "Within a service, the price and the time depend on the style, so it is needed to find a free time. Without it the consultation cannot go on to picking a time."
+        },
+        {
+          "id": "wish_time",
+          "label": "wished day and time",
+          "required": true,
+          "format": "datetime",
+          "need": "It is needed to check whether that time is free. Without it the consultation cannot go on to the booking."
+        },
+        {
+          "id": "designer",
+          "label": "designer",
+          "required": false,
+          "choices": [
+            "jordan",
+            "maya",
+            "alex",
+            "any"
+          ]
+        },
+        {
+          "id": "agree",
+          "label": "the customer's agreement to the proposed time",
+          "required": true,
+          "agreement": true,
+          "after": [
+            "wish_time",
+            "designer"
+          ]
+        }
+      ],
+      "service_items": "service"
+    },
+    "my_booking": {
+      "label": "checking my booking",
+      "step": "manage",
+      "goal": "After the identity check, tell the customer their bookings exactly as the step notice lists them",
+      "items": [
+        {
+          "id": "name",
+          "label": "name",
+          "required": true,
+          "format": "name",
+          "need": "It is matched with the booking records to check that it is really the customer. Without it we cannot tell them about the booking (checking by phone works too)."
+        },
+        {
+          "id": "phone",
+          "label": "mobile number",
+          "required": true,
+          "format": "phone",
+          "need": "It is matched with the booking records to check that it is really the customer. Without it we cannot tell them about the booking (checking by phone works too)."
+        },
+        {
+          "id": "identity",
+          "label": "identity check (the program matches the recorded name and mobile number with the booking records)",
+          "required": true,
+          "computed": true
+        }
+      ]
+    },
+    "change": {
+      "label": "changing or canceling a booking",
+      "step": "manage",
+      "goal": "After the identity check, settle which booking to change or cancel, get the customer's confirmation and do it with the change tool (change_booking)",
+      "items": [
+        {
+          "id": "name",
+          "label": "name",
+          "required": true,
+          "format": "name",
+          "need": "It is matched with the booking records to check that it is really the customer. Without it we cannot change or cancel the booking (it works by phone too)."
+        },
+        {
+          "id": "phone",
+          "label": "mobile number",
+          "required": true,
+          "format": "phone",
+          "need": "It is matched with the booking records to check that it is really the customer. Without it we cannot change or cancel the booking (it works by phone too)."
+        },
+        {
+          "id": "identity",
+          "label": "identity check (the program matches the recorded name and mobile number with the booking records)",
+          "required": true,
+          "computed": true
+        },
+        {
+          "id": "change_booking",
+          "label": "the booking to change (the booking value of this customer's booking in the step notice)",
+          "required": true,
+          "format": "booking",
+          "need": "It tells which booking to change or cancel. Without it we cannot go on."
+        },
+        {
+          "id": "change_action",
+          "label": "change or cancel",
+          "required": true,
+          "choices": [
+            "change",
+            "cancel"
+          ],
+          "need": "What happens next depends on whether it is a change or a cancellation. Without it we cannot go on."
+        },
+        {
+          "id": "change_time",
+          "label": "new day and time",
+          "required": true,
+          "format": "datetime",
+          "when": {
+            "change_action": "change"
+          },
+          "need": "It is needed to check whether the new time is free. Without it we cannot change the booking."
+        },
+        {
+          "id": "change_designer",
+          "label": "new designer",
+          "required": false,
+          "choices": [
+            "jordan",
+            "maya",
+            "alex"
+          ],
+          "when": {
+            "change_action": "change"
+          }
+        },
+        {
+          "id": "change_agree",
+          "label": "the customer's agreement to the new time",
+          "required": true,
+          "agreement": true,
+          "when": {
+            "change_action": "change"
+          },
+          "after": [
+            "change_booking",
+            "change_action",
+            "change_time",
+            "change_designer"
+          ]
+        },
+        {
+          "id": "cancel_reason",
+          "label": "reason for canceling",
+          "required": false,
+          "when": {
+            "change_action": "cancel"
+          }
+        },
+        {
+          "id": "cancel_agree",
+          "label": "the customer's confirmation of the cancellation",
+          "required": true,
+          "agreement": true,
+          "when": {
+            "change_action": "cancel"
+          },
+          "after": [
+            "change_booking",
+            "change_action"
+          ]
+        }
+      ]
+    },
+    "other": {
+      "label": "something else",
+      "step": "consult",
+      "goal": "Write down what it is about and tell the customer the salon will call them",
+      "items": [
+        {
+          "id": "other_what",
+          "label": "what it is about",
+          "required": true,
+          "need": "The salon needs to know what it is about when it calls back. Without it we cannot leave a message."
+        },
+        {
+          "id": "phone",
+          "label": "mobile number",
+          "required": false,
+          "format": "phone"
+        }
+      ]
+    }
+  },
+  "texts": {
+    "_note": "The sentences of the step notice and of the checks (the navigator and the tools put them together; no sentence is written in code). {x} is filled by the program.",
+    "today": "Today: {day}",
+    "purposes": "The customer's requests: {list}",
+    "purpose_entry": "{label} (purpose_{id}, {state}: \"{words}\")",
+    "state_open": "in progress",
+    "state_done": "done",
+    "no_purpose": "No request is recorded yet. Greet the customer and ask how you can help. When the customer says what they want, record it as a purpose_<id> row (salon info info, booking booking, checking my booking my_booking, changing or canceling a booking change, something else other).",
+    "all_done": "No request is in progress. Ask whether there is anything else you can help with; if not, say goodbye.",
+    "just_done": "In this question the program just handled {label} (purpose_{id}). This customer's bookings now: {lines}. Tell the customer the result just as it is.",
+    "collect": "{label}: talk with the customer and collect what the {label} needs. Still missing: {items}. Ask next: {next}",
+    "collect_done": "{label}: everything needed is recorded.",
+    "optional": "Only if the customer wants: {items}",
+    "recorded": "Recorded: {items}",
+    "redo": "To ask again: {items}",
+    "item": "{label} ({id})",
+    "item_choices": "{label} ({id}: one of {choices}{many})",
+    "item_many": "; several comma separated",
+    "item_phone": "{label} ({id}: record it as a US number, e.g. (555) 010-7777)",
+    "item_name": "{label} ({id}: record only the name, without the words around it)",
+    "item_datetime": "{label} ({id}: record it as YYYY-MM-DD HH:MM)",
+    "item_style": "{label} ({id}: menu names in the {field} field, one per service, comma separated. {menus}. If the customer is not sure or wants a suggestion: {recommend})",
+    "item_style_later": "{label} ({id}: from the menu of the service, once the service is chosen)",
+    "menu_of": "{service} menu: {names}",
+    "item_value": "{label}={words}",
+    "info_open": "salon info \"{words}\": answer with what you find in the salon guide (shop_info), then record the state of purpose_info as done.",
+    "other_open": "something else \"{words}\": record what it is about (other_what), tell the customer the salon will call them, then record the state of purpose_other as done.",
+    "next_purposes": "Next request: {list}",
+    "slot_free": "{when} {designer}: free.",
+    "slot_taken": "{when} {designer}: {why}. Find free times around then with the free times tool (find_times), propose one with the designer's name, record the time the customer picks in {time_id} and {who_id} again, then get their agreement.",
+    "slot_no_designer": "{when}: no designer is chosen. Designers free at that time: {free}. Choose one, record it in {who_id} and propose it.",
+    "slot_none_free": "{when}: no designer is free at that time. Find a close free time with the free times tool (find_times), propose one, record the time the customer picks in {time_id} and {who_id} again, then get their agreement.",
+    "agree_open": "Propose this time to the customer with the designer's name; when the customer says yes, record their words in {agree_id}.",
+    "book_now": "The customer agreed. Book it with the booking tool (book).",
+    "change_now": "Everything is recorded and the identity check passed. Do it with the change tool (change_booking).",
+    "verify_first": "The identity check has not passed yet. Get the customer's name and mobile number and record them (name, phone); the program then matches them with the booking records. Before the check, do not say whether there is a booking or not.",
+    "verify_failed": "The identity check did not pass: no booking matches the recorded name and mobile number. Do not say anything about bookings; ask the customer to check their name and number again. Do not say whether another customer has a booking either.",
+    "verified": "The identity check passed. This customer's bookings: {lines}",
+    "my_booking_now": "Tell the customer the bookings above exactly as they are, then record the state of purpose_my_booking as done.",
+    "why_choices": "must be one of {choices}{many}",
+    "why_many": " (several comma separated)",
+    "why_phone": "is not a US phone number (e.g. (555) 010-7777)",
+    "why_name": "must be the name only (e.g. for \"I'm Emma Johnson\": Emma Johnson)",
+    "why_datetime": "must be in the form YYYY-MM-DD HH:MM (e.g. 2026-11-28 14:00)",
+    "why_booking": "is not the booking value of one of this customer's bookings (the start of a booking line in the step notice)",
+    "why_style_field": "write the menu names in the {field} field (words holds what the customer said)",
+    "why_style_service": "the service ({service}) is not recorded yet, so the style cannot be matched. Record the service the customer wants in {service} first",
+    "why_style_menu": "{names} is not on the menu of the chosen service. Write a name from the menu: {menus}",
+    "why_style_twice": "{service} has two styles ({names}). Write one per service",
+    "why_style_missing": "no style yet for {services}: {menus}",
+    "why_recommend": "The customer wants a style suggestion. Ask what look they want, pick two or three styles from the menu that fit what they say and suggest them. When the customer picks one, record that name in the {field} field again. {menus}",
+    "why_missing": "not recorded yet",
+    "why_not_verified": "the identity check did not pass",
+    "why_agree_stale": "the booking, the time or the designer changed after the customer agreed. Get their agreement to the new details again",
+    "why_agree_taken": "the agreed time is not free",
+    "why_not_working": "{name} does not work on {weekday}",
+    "why_past": "that time has already passed",
+    "why_hours": "outside {name}'s hours ({open} to {close})",
+    "why_taken": "{name} has another booking at that time",
+    "why_no_designer": "no designer is chosen",
+    "why_none_free": "no designer is free at that time",
+    "why_not_active": "this booking is already {status}, so it cannot be changed",
+    "cancel_agree_open": "Ask the customer once whether they really want to cancel this booking; when they say yes, record their words in cancel_agree: {line}",
+    "need": "If the customer will not give a missing item or wants to give it later, say why it is needed and that without it we cannot go on: {items}",
+    "need_item": "{label} ({id}): {need}",
+    "reply_foreign": "The reply has letters of another language ({words}). Write it again in English only."
+  }
+}

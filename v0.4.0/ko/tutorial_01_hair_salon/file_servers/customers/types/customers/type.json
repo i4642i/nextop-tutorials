@@ -1,0 +1,30 @@
+{
+  "type": "table",
+  "fields": [
+    {
+      "name": "phone",
+      "type": "phone",
+      "sensitive": true,
+      "description": "the customer's mobile number"
+    },
+    {
+      "name": "name",
+      "type": "text",
+      "description": "the customer's name"
+    },
+    {
+      "name": "hair_note",
+      "type": "text",
+      "description": "hair history, allergies and wishes, in the customer's words"
+    }
+  ],
+  "key": "phone",
+  "extensions": [
+    "json"
+  ],
+  "tools": [
+    "get",
+    "find",
+    "list"
+  ]
+}

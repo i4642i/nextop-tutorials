@@ -1,0 +1,22 @@
+{
+  "blocks": [
+    {"id": "intake", "type": "function", "function": "intake"},
+    {"id": "reader", "type": "worker", "worker": "reader"},
+    {"id": "writer", "type": "worker", "worker": "writer"},
+    {"id": "mail_report", "type": "function", "function": "mail_report"}
+  ],
+  "lines": [
+    {"from": "intake.request", "to": "reader"},
+    {"from": "intake.request", "to": "writer"},
+    {"from": "reader.notes", "to": "writer"},
+    {"from": "intake.request", "to": "mail_report"},
+    {"from": "reader.notes", "to": "mail_report"},
+    {"from": "writer.report", "to": "mail_report"}
+  ],
+  "layout": {
+    "intake": {"x": 40, "y": 140},
+    "reader": {"x": 300, "y": 60},
+    "writer": {"x": 560, "y": 140},
+    "mail_report": {"x": 820, "y": 140}
+  }
+}

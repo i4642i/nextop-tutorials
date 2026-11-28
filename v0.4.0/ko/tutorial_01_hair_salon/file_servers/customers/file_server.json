@@ -1,0 +1,24 @@
+{
+  "name": "customers",
+  "description": "what a customer told the salon about their hair (history, allergies, wishes), one row per phone number; written by the book tool when a booking is made",
+  "lifetime": "project",
+  "access": {
+    "reception": {
+      "read": "subject",
+      "write": true,
+      "show": 2
+    },
+    "person:owner": {
+      "read": "all",
+      "write": true,
+      "delete": true,
+      "grant": true
+    }
+  },
+  "shares": [
+    {
+      "from": "reception",
+      "to": []
+    }
+  ]
+}

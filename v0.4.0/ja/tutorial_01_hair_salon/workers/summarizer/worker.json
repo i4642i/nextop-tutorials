@@ -1,0 +1,32 @@
+{
+  "id": "summarizer",
+  "name": "さき",
+  "title": "カウンセリング要約",
+  "model": "gpt-5.4-mini",
+  "mode": "task",
+  "outputs": [
+    {
+      "name": "summary",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "description": "Write the summary of the booking chat."
+          },
+          "wishes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List what the customer wants or worries about, one item each."
+          }
+        },
+        "required": [
+          "text",
+          "wishes"
+        ]
+      }
+    }
+  ]
+}

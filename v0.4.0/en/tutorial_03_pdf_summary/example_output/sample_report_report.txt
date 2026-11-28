@@ -1,0 +1,18 @@
+PDF classification: sample_report.pdf (2 pages)
+7 text parts · 2 tables · 1 figure
+
+[Text] 7
+  1. Starlight Village Library: 2026 Usage Report (page 1) · 46 characters
+  2. 1. Overview (page 1) · 227 characters
+  3. 2. Usage (page 1) · 186 characters
+  4. 2. Usage (page 1) · 54 characters
+  5. 3. Program satisfaction (page 2) · 182 characters
+  6. 4. Next steps (page 2) · 207 characters
+  7. 5. Conclusion (page 2) · 212 characters
+
+[Tables] 2
+  1. Table 1. Visitors and loans per quarter (page 1) · 5 rows × 4 columns · columns: Quarter | Visitors | Loans | Change vs 2025
+  2. Table 2. Participants and satisfaction per program (out of 5) (page 2) · 4 rows × 3 columns · columns: Program | Participants | Satisfaction
+
+[Figures] 1
+  1. Figure 1. Visitors per month (October was the busiest) (page 1) · 1199×519 pixels

@@ -1,0 +1,1 @@
+{"type": "text", "extensions": ["pdf"], "reader": "pdf_text", "splitter": "paragraphs", "route": {"figure": "figures"}}

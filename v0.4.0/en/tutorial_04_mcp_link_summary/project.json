@@ -1,0 +1,59 @@
+{
+  "format": 1,
+  "name": "mcp link summary",
+  "language": "en",
+  "nextop": ">=0.4,<0.5",
+  "defaults": {
+    "parallel": 1,
+    "max_calls": 14
+  },
+  "adapters": {
+    "llm": {
+      "default": {
+        "class": "nextop.adapters.openai_compat:OpenAICompatLLM",
+        "options": {
+          "base_url": "https://api.openai.com/v1",
+          "key_env": "LLM_API_KEY",
+          "env_file": ".env"
+        }
+      }
+    }
+  },
+  "mcp_servers": {
+    "fetch": {
+      "transport": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp-server-fetch==2026.11.4",
+        "mcp-server-fetch"
+      ],
+      "timeout": 120
+    },
+    "time": {
+      "transport": "stdio",
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp-server-time==2026.11.4",
+        "mcp-server-time",
+        "--local-timezone",
+        "Asia/Seoul"
+      ],
+      "timeout": 120
+    },
+    "filesystem": {
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem@2.2.0",
+        "reports"
+      ],
+      "timeout": 120,
+      "notes": {
+        "write_file": "This server may write only in the project's reports/ folder, and a relative path starts in that folder: write a bare file name such as \"links_20261125-090000.md\" (\"reports/links_...md\" would mean reports/reports/... and fails)."
+      }
+    }
+  }
+}

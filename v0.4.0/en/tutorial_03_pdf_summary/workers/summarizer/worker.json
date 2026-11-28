@@ -1,0 +1,111 @@
+{
+  "id": "summarizer",
+  "name": "Morgan",
+  "title": "PDF summarizer",
+  "model": "gpt-5.4-mini",
+  "outputs": [
+    {
+      "name": "summary",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Write the document's title exactly as the document has it."
+          },
+          "key_points": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 5,
+            "description": "Write 3 to 5 key points.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "point": {
+                  "type": "string",
+                  "description": "Write the key point in one sentence."
+                },
+                "source": {
+                  "type": "string",
+                  "description": "Write the address of the paragraph the point comes from (report.sections[].paragraphs, for example fs://pdf/001#3.2) or of a table."
+                },
+                "quote": {
+                  "type": "string",
+                  "description": "Copy the sentence of that paragraph (or table) that shows the point, word for word."
+                }
+              },
+              "required": [
+                "point",
+                "source",
+                "quote"
+              ]
+            }
+          },
+          "tables": {
+            "type": "array",
+            "maxItems": 2,
+            "description": "Choose 0 to 2 tables to put on the summary page, only the most important ones. An empty list when there is no table or no useful one.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "description": "Write the chosen table's address exactly as the report has it (report.tables[].address)."
+                },
+                "line": {
+                  "type": "string",
+                  "description": "Write in one sentence what the table shows."
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "description": "The numbers of the rows to show (1 is the header row at the top, and it is always shown). Empty shows every row. For a table with more than 14 rows, write only the numbers of the most important rows."
+                }
+              },
+              "required": [
+                "source",
+                "line",
+                "rows"
+              ]
+            }
+          },
+          "figures": {
+            "type": "array",
+            "maxItems": 2,
+            "description": "Choose 0 to 2 figures to put on the summary page, only the most important ones. An empty list when there is no figure.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "figure": {
+                  "type": "string",
+                  "description": "Write the chosen figure's address exactly as the report has it (report.figures[].address)."
+                },
+                "line": {
+                  "type": "string",
+                  "description": "Write in one sentence what the figure shows. Write only what its caption and the text near it say."
+                }
+              },
+              "required": [
+                "figure",
+                "line"
+              ]
+            }
+          },
+          "conclusion": {
+            "type": "string",
+            "description": "Write the document's conclusion in one or two sentences."
+          }
+        },
+        "required": [
+          "title",
+          "key_points",
+          "tables",
+          "figures",
+          "conclusion"
+        ]
+      }
+    }
+  ]
+}

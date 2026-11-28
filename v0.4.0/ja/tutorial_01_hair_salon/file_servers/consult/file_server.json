@@ -1,0 +1,27 @@
+{
+  "name": "consult",
+  "description": "ご相談の間に記録したこと: お客様のご用件（purpose_<id>、対応中か完了）とチェックリストの回答（項目ごとに一行、お客様の言葉に近く）。同じ項目をもう一度書くとその行が変わり、前の値は履歴に残ります。お客様ごとに別々に見え、ご相談が終わるとフロー（chat_end）が消し、残った行も一日たつと消えます",
+  "lifetime": "project",
+  "expire_after": "1d",
+  "access": {
+    "reception": {
+      "write": true,
+      "read": "subject",
+      "show": 2
+    },
+    "close_chat": {
+      "read": "subject",
+      "delete": true
+    },
+    "person:owner": {
+      "read": "all",
+      "delete": true
+    }
+  },
+  "shares": [
+    {
+      "from": "reception",
+      "to": []
+    }
+  ]
+}

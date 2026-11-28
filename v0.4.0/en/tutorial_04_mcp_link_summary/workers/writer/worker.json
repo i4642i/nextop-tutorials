@@ -1,0 +1,32 @@
+{
+  "id": "writer",
+  "name": "Blake",
+  "title": "Writer",
+  "model": "gpt-5.4-mini",
+  "tools": [
+    "time__get_current_time",
+    "filesystem__write_file"
+  ],
+  "outputs": [
+    {
+      "name": "report",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "The name of the file you saved. Write the request's report_file exactly as it is."
+          },
+          "headline": {
+            "type": "string",
+            "description": "Write the whole summary as one English sentence (about 10 words). It becomes the mail subject."
+          }
+        },
+        "required": [
+          "file",
+          "headline"
+        ]
+      }
+    }
+  ]
+}

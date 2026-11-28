@@ -1,0 +1,53 @@
+{
+  "id": "planner",
+  "name": "보람",
+  "title": "구성 담당",
+  "model": "gpt-5.4-mini",
+  "outputs": [
+    {
+      "name": "outline",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "slides": {
+            "type": "array",
+            "description": "슬라이드를 순서대로 씁니다. 개수는 요청의 brief.slides와 같아야 합니다.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "layout": {
+                  "type": "string",
+                  "description": "레이아웃 코드: cover, agenda, section, bullets, figure, table, comparison, closing 중 하나."
+                },
+                "topic": {
+                  "type": "string",
+                  "description": "이 슬라이드가 다룰 내용을 한국어 한 문장으로 씁니다(작성 담당에게 주는 메모, 화면에 나오지 않음)."
+                },
+                "parts": {
+                  "type": "array",
+                  "items": {"type": "string"},
+                  "description": "이 슬라이드의 근거가 될 글 부분 주소(report.sections[].address). 여러 조각으로 나뉜 절은 조각 하나면 됩니다(프로그램이 pieces를 모두 넣음). 표와 그림 슬라이드는 그 표나 그림의 text_parts 가운데 하나 이상. 표지는 문서 제목이 있는 글 부분 하나, 목차와 구역 표지는 빈 목록."
+                },
+                "table": {
+                  "type": "string",
+                  "description": "표와 설명(table) 슬라이드에 넣을 표의 주소(report.tables[].address). 다른 레이아웃은 빈 글자."
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {"type": "integer"},
+                  "description": "표에서 보여 줄 행 번호. 제목 행(1행과 그 아래 숫자 없는 행)은 늘 나옵니다. 비우면 모든 행. 표가 아니면 빈 목록."
+                },
+                "figure": {
+                  "type": "string",
+                  "description": "그림과 설명(figure) 슬라이드에 넣을 그림의 주소(report.figures[].address). 다른 레이아웃은 빈 글자."
+                }
+              },
+              "required": ["layout", "topic", "parts", "table", "rows", "figure"]
+            }
+          }
+        },
+        "required": ["slides"]
+      }
+    }
+  ]
+}

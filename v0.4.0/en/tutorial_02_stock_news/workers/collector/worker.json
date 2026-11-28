@@ -1,0 +1,53 @@
+{
+  "id": "collector",
+  "name": "Quinn",
+  "title": "News collector",
+  "model": "gpt-5.4-mini",
+  "tools": [
+    "news_search"
+  ],
+  "outputs": [
+    {
+      "name": "coverage",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "Write one entry for every company of the brief, in the same order.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "type": "string",
+                  "description": "Write the company's name exactly as the brief has it."
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "ok",
+                    "thin",
+                    "none"
+                  ],
+                  "description": "Write ok when two or more articles about the company are stored, thin for one, none for no article."
+                },
+                "note": {
+                  "type": "string",
+                  "description": "Write one sentence on what the collected news is about, or why nothing was kept."
+                }
+              },
+              "required": [
+                "company",
+                "status",
+                "note"
+              ]
+            }
+          }
+        },
+        "required": [
+          "items"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "id": "summarizer",
+  "name": "そら",
+  "title": "PDF 要約担当",
+  "model": "gpt-5.4-mini",
+  "outputs": [
+    {
+      "name": "summary",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "文書のタイトルを、文書にあるとおりに書いてください。"
+          },
+          "key_points": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 5,
+            "description": "要点を 3〜5 個書いてください。",
+            "items": {
+              "type": "object",
+              "properties": {
+                "point": {
+                  "type": "string",
+                  "description": "要点を日本語の一文で書いてください。"
+                },
+                "source": {
+                  "type": "string",
+                  "description": "要点の出どころである段落のアドレス（report.sections[].paragraphs、例: fs://pdf/001#3.2）または表のアドレスを書いてください。"
+                },
+                "quote": {
+                  "type": "string",
+                  "description": "その段落（または表）から、要点を示す文を一字一句そのまま写してください。"
+                }
+              },
+              "required": [
+                "point",
+                "source",
+                "quote"
+              ]
+            }
+          },
+          "tables": {
+            "type": "array",
+            "maxItems": 2,
+            "description": "要約ページに載せる表を、特に大事なものだけ 0〜2 個選んでください。表がない、または役に立つ表がないときは空のリストにします。",
+            "items": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "description": "選んだ表のアドレスを、report にあるとおりに書いてください（report.tables[].address）。"
+                },
+                "line": {
+                  "type": "string",
+                  "description": "表が何を示しているかを日本語の一文で書いてください。"
+                },
+                "rows": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer"
+                  },
+                  "description": "表示する行の番号（1 が一番上の見出し行で、見出し行はいつも表示されます）。空にするとすべての行を表示します。14 行を超える表では、特に大事な行の番号だけを書いてください。"
+                }
+              },
+              "required": [
+                "source",
+                "line",
+                "rows"
+              ]
+            }
+          },
+          "figures": {
+            "type": "array",
+            "maxItems": 2,
+            "description": "要約ページに載せる図を、特に大事なものだけ 0〜2 個選んでください。図がないときは空のリストにします。",
+            "items": {
+              "type": "object",
+              "properties": {
+                "figure": {
+                  "type": "string",
+                  "description": "選んだ図のアドレスを、report にあるとおりに書いてください（report.figures[].address）。"
+                },
+                "line": {
+                  "type": "string",
+                  "description": "図が何を示しているかを日本語の一文で書いてください。図のキャプションと近くの本文に書かれていることだけを書きます。"
+                }
+              },
+              "required": [
+                "figure",
+                "line"
+              ]
+            }
+          },
+          "conclusion": {
+            "type": "string",
+            "description": "文書の結論を日本語で一、二文で書いてください。"
+          }
+        },
+        "required": [
+          "title",
+          "key_points",
+          "tables",
+          "figures",
+          "conclusion"
+        ]
+      }
+    }
+  ]
+}

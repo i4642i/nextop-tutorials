@@ -1,0 +1,35 @@
+{
+  "name": "bookings",
+  "description": "The salon's booking records: one row per booking (day, time, designer, services, price, status, name, mobile number). The status is pending (waiting for the designer's approval), confirmed, declined (by the designer) or cancelled (by the customer). The reception's tools and the flow functions read and write it. The reception's model never sees this server directly (no common tool, not in its input); the tools tell only the bookings of a customer who passed the identity check (name and mobile number match)",
+  "lifetime": "project",
+  "access": {
+    "reception": {
+      "read": "all",
+      "write": true,
+      "show": 1
+    },
+    "decide_booking": {
+      "read": "all",
+      "write": true
+    },
+    "seed_bookings": {
+      "read": "all",
+      "write": true
+    },
+    "load_visit": {
+      "read": "all"
+    },
+    "person:owner": {
+      "read": "all",
+      "write": true,
+      "delete": true
+    }
+  },
+  "shares": [
+    {
+      "from": "reception",
+      "to": []
+    }
+  ],
+  "per_subject": false
+}

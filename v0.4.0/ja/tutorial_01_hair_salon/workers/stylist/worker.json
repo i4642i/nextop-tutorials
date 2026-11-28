@@ -1,0 +1,47 @@
+{
+  "id": "stylist",
+  "name": "みお",
+  "title": "施術準備",
+  "model": "gpt-5.4-mini",
+  "outputs": [
+    {
+      "name": "prep",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "ready": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 4,
+            "description": "お客様の来店前に準備すること"
+          },
+          "ask_first": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 3,
+            "description": "スタイリストが最初の数分で確認すること"
+          },
+          "care": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 3,
+            "description": "気をつけること（なければ []）"
+          }
+        },
+        "required": [
+          "ready",
+          "ask_first",
+          "care"
+        ]
+      }
+    }
+  ]
+}

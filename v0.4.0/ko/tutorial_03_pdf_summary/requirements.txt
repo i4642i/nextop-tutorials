@@ -1,0 +1,8 @@
+# Tutorial 3: PDF summary: everything this tutorial needs (setup.bat installs it into .venv).
+# Versions are the ones tested together on Windows 10 with Python 3.11 and 3.13.
+# The files of this tutorial use the file servers of nextop 0.4.0 (type folders, common tools), so nextop is pinned to 0.4.0
+# (project.json "nextop" says the same range). To try a build that is not on PyPI: setup.bat <path to the .whl>
+nextop[pdf]==0.4.0
+reportlab==5.1.1      # draws the A4 summary PDF and the sample PDF (make_sample_pdf.py)
+Pillow==13.0.0        # draws the picture in the sample PDF
+pytest==9.2.0         # runs the offline tests in tests/

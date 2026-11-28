@@ -1,0 +1,90 @@
+{
+  "_note": "Made-up US salon. Prices in US dollars before tip, minutes per visit. Weekdays: 0 = Monday ... 6 = Sunday. Times are 24-hour HH:MM in this file and in the tools. Designer e-mails are placeholders (example.com). Each service has a menu (styles: name, price, minutes; group is only for the owner reading this file, never shown to customers) and a checklist: what the salon needs to know before the visit (required ones block the booking); the label is the words of the step notice. The customer picks one style per service (the consult item style); a service whose menu has one style takes it without asking. recommend: the style value a customer gives who does not know and wants a suggestion. The style names are the ones US salon menus and trend reports use (DOC_POINTS.md lists the sources). The other consult checklists (name, phone, style, time, change, cancel ...) are in checklists.json.",
+  "name": "Willow Hair Studio",
+  "slot_minutes": 30,
+  "designers": {
+    "jordan": {
+      "name": "Jordan",
+      "email": "jordan@example.com",
+      "days": [1, 2, 3, 4, 5],
+      "open": "09:00",
+      "close": "17:00"
+    },
+    "maya": {
+      "name": "Maya",
+      "email": "maya@example.com",
+      "days": [2, 3, 4, 5, 6],
+      "open": "10:00",
+      "close": "19:00"
+    },
+    "alex": {
+      "name": "Alex",
+      "email": "alex@example.com",
+      "days": [0, 1, 2, 3, 4],
+      "open": "10:00",
+      "close": "19:00"
+    }
+  },
+  "services": {
+    "cut": {
+      "label": "Haircut",
+      "styles": [
+        {"name": "Taper fade", "group": "men", "price": 40, "minutes": 30},
+        {"name": "Mid fade", "group": "men", "price": 40, "minutes": 30},
+        {"name": "Skin fade", "group": "men", "price": 45, "minutes": 40},
+        {"name": "Textured crop", "group": "men", "price": 40, "minutes": 30},
+        {"name": "Buzz cut", "group": "men", "price": 25, "minutes": 30},
+        {"name": "Modern mullet", "group": "men", "price": 45, "minutes": 40},
+        {"name": "Long layers", "group": "women", "price": 75, "minutes": 60},
+        {"name": "Modern shag", "group": "women", "price": 80, "minutes": 60},
+        {"name": "Box bob", "group": "women", "price": 70, "minutes": 60},
+        {"name": "Rounded lob", "group": "women", "price": 70, "minutes": 60},
+        {"name": "Bixie", "group": "women", "price": 70, "minutes": 60},
+        {"name": "Curtain bangs", "group": "women", "price": 25, "minutes": 30}
+      ],
+      "checklist": [
+        {"id": "cut_bangs", "label": "what to do with the bangs", "required": true},
+        {"id": "cut_photo", "label": "a reference photo (if any)", "required": false}
+      ]
+    },
+    "perm": {
+      "label": "Perm / texture",
+      "styles": [
+        {"name": "Texture perm", "group": "men", "price": 110, "minutes": 120},
+        {"name": "Body wave perm", "group": "women", "price": 140, "minutes": 150},
+        {"name": "Beach wave perm", "group": "women", "price": 150, "minutes": 150},
+        {"name": "Spiral perm", "group": "women", "price": 180, "minutes": 180},
+        {"name": "Keratin smoothing", "group": "common", "price": 250, "minutes": 180}
+      ],
+      "checklist": [
+        {"id": "perm_history", "label": "a perm or color in the last 3 months", "required": true},
+        {"id": "perm_damage", "label": "how the hair feels these days", "required": true}
+      ]
+    },
+    "color": {
+      "label": "Color",
+      "styles": [
+        {"name": "All-over color", "group": "common", "price": 120, "minutes": 120},
+        {"name": "Root touch-up", "group": "common", "price": 85, "minutes": 90},
+        {"name": "Full highlights", "group": "common", "price": 200, "minutes": 150},
+        {"name": "Balayage", "group": "common", "price": 250, "minutes": 180}
+      ],
+      "checklist": [
+        {"id": "color_want", "label": "the color and how light", "required": true},
+        {"id": "color_bleach", "label": "bleach or lightener before", "required": true},
+        {"id": "color_last", "label": "the last color service", "required": true},
+        {"id": "color_allergy", "label": "a reaction to hair color or a sensitive scalp", "required": true}
+      ]
+    },
+    "treatment": {
+      "label": "Treatment",
+      "styles": [
+        {"name": "Bond repair treatment", "group": "common", "price": 45, "minutes": 30}
+      ],
+      "checklist": [
+        {"id": "treatment_concern", "label": "what bothers the customer most about their hair", "required": true}
+      ]
+    }
+  },
+  "recommend": "recommend"
+}

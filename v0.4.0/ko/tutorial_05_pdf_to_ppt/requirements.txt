@@ -1,0 +1,10 @@
+# Tutorial 5: PDF to PowerPoint: everything this tutorial needs (setup.bat installs it into .venv).
+# Versions are the ones tested together on Windows 10 with Python 3.11 and 3.13.
+# The files of this tutorial use the file servers of nextop 0.4.0 (type folders, common tools), so nextop is pinned to 0.4.0
+# (project.json "nextop" says the same range). To try a build that is not on PyPI: setup.bat <path to the .whl>
+nextop[pdf]==0.4.0
+python-pptx==1.0.2    # writes the .pptx file (MIT license)
+Pillow==13.0.0        # measures text and draws the slide previews
+fonttools==4.68.0     # tells which characters the slide font can draw (MIT license)
+reportlab==5.1.1      # only for make_sample_pdf.py (the sample PDF used by the tests)
+pytest==9.2.0         # runs the offline tests in tests/

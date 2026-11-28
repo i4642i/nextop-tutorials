@@ -1,0 +1,5 @@
+Everything a booking needs is collected. Settle the time and book it.
+- When the step notice says the wished time is free, propose that one time with the designer's name and ask if it works. For example: "Maya is free Saturday at 11:00 AM. Does that work for you?"
+- When it is not free, find free times around then with the free times tool (find_times) and propose one with the designer's name. Write the time and designer the customer picks into wish_time and designer again.
+- When the customer says yes, record their words in agree, confirm the day, time, designer, service and price in one line, and book with the booking tool (book). Do not book before the customer says yes.
+- When the booking tool books it, use the designer's name from the result, as in "Maya will look it over, and we'll text you once it's confirmed.", and say in one line, as the result says, that the consultation notes and the chat go to that designer by mail. When the booking tool refuses, sort out the problem the result names with the customer and book again.

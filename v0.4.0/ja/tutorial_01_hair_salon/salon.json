@@ -1,0 +1,87 @@
+{
+  "_note": "Made-up salon in Japan. Prices in yen, tax included (Japanese price display), minutes per visit. Weekdays: 0 = Monday ... 6 = Sunday; the salon is closed on Tuesdays (no designer has day 1). Times are 24-hour HH:MM everywhere. Designer e-mails are placeholders (example.com). Each service has a menu (styles: name, price, minutes; group is only for the owner reading this file, never shown to customers) and a checklist: what the salon needs to know before the visit (required ones block the booking); the label is the words of the step notice. The customer picks one style per service (the consult item style); a service whose menu has one style takes it without asking. recommend: the style value a customer gives who does not know and wants a suggestion. The style names are the ones Japanese salon menus and trend articles use (DOC_POINTS.md lists the sources). The other consult checklists (name, phone, style, time, change, cancel ...) are in checklists.json.",
+  "name": "ヘアサロン こもれび",
+  "slot_minutes": 30,
+  "designers": {
+    "takahashi": {
+      "name": "高橋",
+      "email": "takahashi@example.com",
+      "days": [0, 2, 3, 4, 5],
+      "open": "10:00",
+      "close": "19:00"
+    },
+    "nakamura": {
+      "name": "中村",
+      "email": "nakamura@example.com",
+      "days": [2, 3, 4, 5, 6],
+      "open": "10:00",
+      "close": "19:00"
+    },
+    "kobayashi": {
+      "name": "小林",
+      "email": "kobayashi@example.com",
+      "days": [0, 3, 4, 5, 6],
+      "open": "11:00",
+      "close": "20:00"
+    }
+  },
+  "services": {
+    "cut": {
+      "label": "カット",
+      "styles": [
+        {"name": "マッシュ", "group": "men", "price": 5500, "minutes": 60},
+        {"name": "センターパート", "group": "men", "price": 5500, "minutes": 60},
+        {"name": "フェードカット", "group": "men", "price": 6050, "minutes": 60},
+        {"name": "ツーブロック", "group": "men", "price": 5500, "minutes": 60},
+        {"name": "ウルフカット", "group": "common", "price": 6600, "minutes": 60},
+        {"name": "ハッシュカット", "group": "women", "price": 6600, "minutes": 60},
+        {"name": "韓国風レイヤーカット", "group": "women", "price": 7150, "minutes": 60},
+        {"name": "ボブ", "group": "women", "price": 6050, "minutes": 60},
+        {"name": "切りっぱなしボブ", "group": "women", "price": 6050, "minutes": 60},
+        {"name": "前髪カット", "group": "common", "price": 1650, "minutes": 30}
+      ],
+      "checklist": [
+        {"id": "cut_bangs", "label": "前髪をどうするか", "required": true},
+        {"id": "cut_photo", "label": "参考写真（あれば）", "required": false}
+      ]
+    },
+    "perm": {
+      "label": "パーマ",
+      "styles": [
+        {"name": "ツイストスパイラルパーマ", "group": "men", "price": 13200, "minutes": 120},
+        {"name": "ニュアンスパーマ", "group": "common", "price": 11000, "minutes": 120},
+        {"name": "デジタルパーマ", "group": "women", "price": 15400, "minutes": 180},
+        {"name": "縮毛矯正", "group": "common", "price": 17600, "minutes": 180}
+      ],
+      "checklist": [
+        {"id": "perm_history", "label": "この3か月以内のパーマやカラー", "required": true},
+        {"id": "perm_damage", "label": "最近の髪の状態", "required": true}
+      ]
+    },
+    "color": {
+      "label": "カラー",
+      "styles": [
+        {"name": "全体カラー", "group": "common", "price": 8800, "minutes": 90},
+        {"name": "リタッチカラー", "group": "common", "price": 6600, "minutes": 60},
+        {"name": "インナーカラー", "group": "common", "price": 11000, "minutes": 120},
+        {"name": "ハイライト", "group": "common", "price": 13200, "minutes": 150}
+      ],
+      "checklist": [
+        {"id": "color_want", "label": "希望の色と明るさ", "required": true},
+        {"id": "color_bleach", "label": "ブリーチの経験", "required": true},
+        {"id": "color_last", "label": "前回のカラー", "required": true},
+        {"id": "color_allergy", "label": "カラー剤でかぶれたことや頭皮の敏感さ", "required": true}
+      ]
+    },
+    "treatment": {
+      "label": "トリートメント",
+      "styles": [
+        {"name": "トリートメント", "group": "common", "price": 4400, "minutes": 30}
+      ],
+      "checklist": [
+        {"id": "treatment_concern", "label": "髪でいちばん気になること", "required": true}
+      ]
+    }
+  },
+  "recommend": "おまかせ"
+}

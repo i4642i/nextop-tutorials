@@ -1,0 +1,5 @@
+# Tutorial 4: MCP link summary: everything this tutorial needs (setup.bat installs it into .venv).
+# Versions are the ones tested together on Windows 10 with Python 3.11 and 3.13.
+nextop[mcp]==0.4.0
+uv==0.13.10           # gives uvx, which downloads and runs the Python MCP servers fetch and time (their versions are pinned in project.json)
+pytest==9.2.0         # runs the offline tests in tests/

@@ -1,0 +1,5 @@
+{
+  "blocks": [{"id": "close_chat", "type": "function", "function": "close_chat"}],
+  "lines": [],
+  "layout": {"close_chat": {"x": 40, "y": 140}}
+}

@@ -1,0 +1,6 @@
+# Tutorial 2: stock news outlook: everything this tutorial needs (setup.bat installs it into .venv).
+# Versions are the ones tested together on Windows 10 with Python 3.11 and 3.13.
+# The files of this tutorial use the file servers of nextop 0.4.0 (type folders, common tools), so nextop is pinned to 0.4.0
+# (project.json "nextop" says the same range). To try a build that is not on PyPI: setup.bat <path to the .whl>
+nextop==0.4.0
+pytest==9.2.0         # runs the offline tests in tests/

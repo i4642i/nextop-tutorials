@@ -1,0 +1,94 @@
+{
+  "id": "writer",
+  "name": "Sage",
+  "title": "Slide writer",
+  "model": "gpt-5.4-mini",
+  "outputs": [
+    {
+      "name": "writing",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "The slide's title, short, in English. On the cover (cover) it is a one-line subtitle that introduces the document."
+          },
+          "bullets": {
+            "type": "array",
+            "description": "The bullets. Their number follows slide.bullets (min, max). The cover, agenda, section and comparison slides have an empty list.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "text": {
+                  "type": "string",
+                  "description": "One short English sentence shown on the slide."
+                },
+                "source": {
+                  "type": "string",
+                  "description": "The address of the paragraph it rests on: one of slide.parts[].paragraphs."
+                },
+                "quote": {
+                  "type": "string",
+                  "description": "The sentence of that paragraph it rests on, copied word for word."
+                }
+              },
+              "required": [
+                "text",
+                "source",
+                "quote"
+              ]
+            }
+          },
+          "columns": {
+            "type": "array",
+            "description": "Only on a comparison slide (comparison): exactly two, the left and the right column. An empty list for every other layout.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "heading": {
+                  "type": "string",
+                  "description": "The column's heading (the name of what it compares)."
+                },
+                "bullets": {
+                  "type": "array",
+                  "description": "The column's bullets.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "text": {
+                        "type": "string",
+                        "description": "One short English sentence shown on the slide."
+                      },
+                      "source": {
+                        "type": "string",
+                        "description": "The address of the paragraph it rests on: one of slide.parts[].paragraphs."
+                      },
+                      "quote": {
+                        "type": "string",
+                        "description": "The sentence of that paragraph it rests on, copied word for word."
+                      }
+                    },
+                    "required": [
+                      "text",
+                      "source",
+                      "quote"
+                    ]
+                  }
+                }
+              },
+              "required": [
+                "heading",
+                "bullets"
+              ]
+            }
+          }
+        },
+        "required": [
+          "title",
+          "bullets",
+          "columns"
+        ]
+      }
+    }
+  ]
+}

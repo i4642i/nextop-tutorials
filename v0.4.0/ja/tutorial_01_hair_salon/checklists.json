@@ -1,0 +1,298 @@
+{
+  "_note": "The consult checklists: what the reception collects for each purpose of a chat. The navigator (workers/reception/navigator.py) compares the recorded consult rows with this file and names the step and the notice; nothing here is in code. A purpose is recorded as a row with item purpose_<id> (words: what the customer asked, state: open or done). Each item has an id (the consult row's item), a label (the words of the notice), required, and optionally choices (the words must be one of them; many: several, comma separated) or menu (the style: menu names of salon.json for the services recorded in the item named there, one per service, comma separated, recorded in the consult field named by field; recommend of salon.json when the customer wants a suggestion) or format (phone: a Japanese phone number, read by nextop's phone field type; datetime: YYYY-MM-DD HH:MM; name: the name only, without a sentence ending such as です). An item with when applies only when another item has that value. service_items: the per-service questions of salon.json (services.<id>.checklist) join the booking checklist for the services recorded in the item named there. need: why a required item is needed and what cannot go on without it; the step notice names it for the items still missing, so the reception can tell a customer who declines or postpones one.",
+  "purposes": {
+    "info": {
+      "label": "サロンのご案内",
+      "step": "consult",
+      "goal": "サロン案内（shop_info）で調べて答えます",
+      "items": []
+    },
+    "booking": {
+      "label": "ご予約",
+      "step": "booking",
+      "goal": "予約に必要なことをすべて伺い、空いている時間一つにお客様の了承をいただいて予約します",
+      "items": [
+        {
+          "id": "name",
+          "label": "お名前",
+          "required": true,
+          "format": "name",
+          "need": "ご予約をお客様のお名前でお取りし、ご来店時に確認するために必要です。ないと相談が時間選びに進めません。"
+        },
+        {
+          "id": "phone",
+          "label": "携帯電話番号",
+          "required": true,
+          "format": "phone",
+          "need": "確定のショートメッセージをお送りし、ご本人確認をするために必要です。ないと相談が時間選びに進めません（お電話でもご予約いただけます）。"
+        },
+        {
+          "id": "service",
+          "label": "メニュー",
+          "required": true,
+          "choices": [
+            "cut",
+            "perm",
+            "color",
+            "treatment"
+          ],
+          "many": true,
+          "need": "メニューごとに所要時間と料金が違うため、空き時間を探すのに必要です。ないと相談が時間選びに進めません。"
+        },
+        {
+          "id": "style",
+          "label": "スタイル",
+          "required": true,
+          "menu": "service",
+          "field": "style",
+          "need": "同じメニューでもスタイルによって料金と所要時間が違うため、空き時間を探すのに必要です。ないと相談が時間選びに進めません。"
+        },
+        {
+          "id": "wish_time",
+          "label": "希望の日時",
+          "required": true,
+          "format": "datetime",
+          "need": "その時間が空いているか確かめるために必要です。ないと相談が予約に進めません。"
+        },
+        {
+          "id": "designer",
+          "label": "スタイリスト",
+          "required": false,
+          "choices": [
+            "takahashi",
+            "nakamura",
+            "kobayashi",
+            "any"
+          ]
+        },
+        {
+          "id": "agree",
+          "label": "提案した時間へのお客様の了承",
+          "required": true,
+          "agreement": true,
+          "after": [
+            "wish_time",
+            "designer"
+          ]
+        }
+      ],
+      "service_items": "service"
+    },
+    "my_booking": {
+      "label": "予約の確認",
+      "step": "manage",
+      "goal": "ご本人確認のあと、ステップ案内にあるこのお客様の予約をそのままお伝えします",
+      "items": [
+        {
+          "id": "name",
+          "label": "お名前",
+          "required": true,
+          "format": "name",
+          "need": "予約の記録と照らしてご本人か確かめるために必要です。ないと予約の内容をお伝えできません（お電話でも確認できます）。"
+        },
+        {
+          "id": "phone",
+          "label": "携帯電話番号",
+          "required": true,
+          "format": "phone",
+          "need": "予約の記録と照らしてご本人か確かめるために必要です。ないと予約の内容をお伝えできません（お電話でも確認できます）。"
+        },
+        {
+          "id": "identity",
+          "label": "ご本人確認（記録したお名前と携帯電話番号が予約の記録と合うかをプログラムが照らします）",
+          "required": true,
+          "computed": true
+        }
+      ]
+    },
+    "change": {
+      "label": "予約の変更やキャンセル",
+      "step": "manage",
+      "goal": "ご本人確認のあと、どの予約を変更するかキャンセルするかを決め、お客様の確認をいただいて予約変更ツール（change_booking）で処理します",
+      "items": [
+        {
+          "id": "name",
+          "label": "お名前",
+          "required": true,
+          "format": "name",
+          "need": "予約の記録と照らしてご本人か確かめるために必要です。ないと予約の変更やキャンセルができません（お電話でもできます）。"
+        },
+        {
+          "id": "phone",
+          "label": "携帯電話番号",
+          "required": true,
+          "format": "phone",
+          "need": "予約の記録と照らしてご本人か確かめるために必要です。ないと予約の変更やキャンセルができません（お電話でもできます）。"
+        },
+        {
+          "id": "identity",
+          "label": "ご本人確認（記録したお名前と携帯電話番号が予約の記録と合うかをプログラムが照らします）",
+          "required": true,
+          "computed": true
+        },
+        {
+          "id": "change_booking",
+          "label": "変更する予約（ステップ案内にあるこのお客様の予約の booking の値）",
+          "required": true,
+          "format": "booking",
+          "need": "どの予約を変更・キャンセルするか決めるために必要です。ないと先に進めません。"
+        },
+        {
+          "id": "change_action",
+          "label": "変更かキャンセルか",
+          "required": true,
+          "choices": [
+            "change",
+            "cancel"
+          ],
+          "need": "変更かキャンセルかで次にすることが変わります。ないと先に進めません。"
+        },
+        {
+          "id": "change_time",
+          "label": "変更後の日時",
+          "required": true,
+          "format": "datetime",
+          "when": {
+            "change_action": "change"
+          },
+          "need": "変更後の時間が空いているか確かめるために必要です。ないと予約を変更できません。"
+        },
+        {
+          "id": "change_designer",
+          "label": "変更後のスタイリスト",
+          "required": false,
+          "choices": [
+            "takahashi",
+            "nakamura",
+            "kobayashi"
+          ],
+          "when": {
+            "change_action": "change"
+          }
+        },
+        {
+          "id": "change_agree",
+          "label": "変更後の時間へのお客様の了承",
+          "required": true,
+          "agreement": true,
+          "when": {
+            "change_action": "change"
+          },
+          "after": [
+            "change_booking",
+            "change_action",
+            "change_time",
+            "change_designer"
+          ]
+        },
+        {
+          "id": "cancel_reason",
+          "label": "キャンセルの理由",
+          "required": false,
+          "when": {
+            "change_action": "cancel"
+          }
+        },
+        {
+          "id": "cancel_agree",
+          "label": "キャンセルへのお客様の確認",
+          "required": true,
+          "agreement": true,
+          "when": {
+            "change_action": "cancel"
+          },
+          "after": [
+            "change_booking",
+            "change_action"
+          ]
+        }
+      ]
+    },
+    "other": {
+      "label": "そのほかのご用件",
+      "step": "consult",
+      "goal": "どんなご用件かを記録し、サロンからお電話でご連絡すると伝えます",
+      "items": [
+        {
+          "id": "other_what",
+          "label": "ご用件の内容",
+          "required": true,
+          "need": "サロンからご連絡するときに、どんなご用件か知っておく必要があります。ないと連絡を残せません。"
+        },
+        {
+          "id": "phone",
+          "label": "携帯電話番号",
+          "required": false,
+          "format": "phone"
+        }
+      ]
+    }
+  },
+  "texts": {
+    "_note": "The sentences of the step notice and of the checks (the navigator and the tools put them together; no sentence is written in code). {x} is filled by the program.",
+    "today": "今日: {day}",
+    "purposes": "お客様のご用件: {list}",
+    "purpose_entry": "{label}（purpose_{id}、{state}: 「{words}」）",
+    "state_open": "対応中",
+    "state_done": "完了",
+    "no_purpose": "まだご用件が記録されていません。あいさつをして、ご用件を伺います。お客様がご用件を話したら、そのご用件を purpose_<id> の行として記録します（サロンのご案内 info、ご予約 booking、予約の確認 my_booking、予約の変更やキャンセル change、そのほかのご用件 other）。",
+    "all_done": "対応中のご用件はありません。ほかにお手伝いできることがあるか伺い、なければあいさつで締めくくります。",
+    "just_done": "この質問で、プログラムが{label}（purpose_{id}）をたった今処理しました。このお客様の今の予約: {lines}。処理した結果をそのままお客様に伝えます。",
+    "collect": "{label}: お客様と話しながら、{label}に必要なことを伺います。残り: {items}。次に伺うこと: {next}",
+    "collect_done": "{label}: 必要なことはすべて記録されました。",
+    "optional": "お客様が望むときだけ: {items}",
+    "recorded": "記録済み: {items}",
+    "redo": "もう一度伺うこと: {items}",
+    "item": "{label}（{id}）",
+    "item_choices": "{label}（{id}: {choices} のどれか{many}）",
+    "item_many": "、複数ならカンマ区切り",
+    "item_phone": "{label}（{id}: 090-1234-5678 の形で記録）",
+    "item_name": "{label}（{id}: お名前の部分だけを記録）",
+    "item_datetime": "{label}（{id}: YYYY-MM-DD HH:MM の形で記録）",
+    "item_style": "{label}（{id}: {field} の欄にメニュー名をメニューごとに一つずつ、複数ならカンマ区切り。{menus}。お客様がよくわからない、おすすめしてほしいと言ったら {recommend}）",
+    "item_style_later": "{label}（{id}: メニューが決まってから、そのメニューの中から）",
+    "menu_of": "{service}のメニュー: {names}",
+    "item_value": "{label}={words}",
+    "info_open": "サロンのご案内「{words}」: サロン案内（shop_info）で見つけた内容で答え、答えたあと purpose_info の state を done と記録します。",
+    "other_open": "そのほかのご用件「{words}」: ご用件の内容（other_what）を記録し、サロンからお電話でご連絡すると伝えたあと purpose_other の state を done と記録します。",
+    "next_purposes": "続けて対応するご用件: {list}",
+    "slot_free": "{when} {designer}: 空いています。",
+    "slot_taken": "{when} {designer}: {why}。空き時間ツール（find_times）でその前後の空き時間を探し、スタイリストの名前と一緒に一つ提案して、お客様が選んだ時間を {time_id} と {who_id} に記録し直してから了承をいただきます。",
+    "slot_no_designer": "{when}: スタイリストが決まっていません。その時間に空いているスタイリスト: {free}。一人に決めて {who_id} に記録し、提案します。",
+    "slot_none_free": "{when}: その時間に空いているスタイリストはいません。空き時間ツール（find_times）で近い空き時間を探して一つ提案し、お客様が選んだ時間を {time_id} と {who_id} に記録し直してから了承をいただきます。",
+    "agree_open": "この時間をスタイリストの名前と一緒にお客様に提案し、お客様が了承したらその言葉を {agree_id} に記録します。",
+    "book_now": "お客様が了承しました。予約ツール（book）で予約します。",
+    "change_now": "すべて記録され、ご本人確認も済みました。予約変更ツール（change_booking）で処理します。",
+    "verify_first": "ご本人確認がまだです。お客様のお名前と携帯電話番号を伺って記録すると（name、phone）、プログラムが予約の記録と照らします。ご本人確認の前は、予約があるかないかも言いません。",
+    "verify_failed": "ご本人確認ができませんでした: 記録したお名前と携帯電話番号に合う予約がありません。予約の内容は言わず、お名前と番号をもう一度確かめてほしいとお願いします。ほかのお客様の予約があるかどうかも言いません。",
+    "verified": "ご本人確認ができました。このお客様の予約: {lines}",
+    "my_booking_now": "上の予約をそのままお伝えし、伝えたあと purpose_my_booking の state を done と記録します。",
+    "why_choices": "{choices} のどれか{many}で書く必要があります",
+    "why_many": "（複数ならカンマ区切り）",
+    "why_phone": "日本の電話番号（例: 090-1234-5678）ではありません",
+    "why_name": "お名前だけを書く必要があります（例:「山田花子です」と言われたら 山田花子）",
+    "why_datetime": "YYYY-MM-DD HH:MM の形（例: 2026-11-28 14:00）で書く必要があります",
+    "why_booking": "このお客様の予約の booking の値（ステップ案内の予約の行の先頭）ではありません",
+    "why_style_field": "メニュー名を {field} の欄に書く必要があります（words にはお客様の言葉）",
+    "why_style_service": "メニュー（{service}）がまだ記録されていないため、スタイルを照らせません。お客様が望むメニューを先に {service} に記録します",
+    "why_style_menu": "{names} は選んだメニューにありません。メニューにある名前で書きます: {menus}",
+    "why_style_twice": "{service}にスタイルが二つあります（{names}）。メニューごとに一つだけ書きます",
+    "why_style_missing": "{services}のスタイルがまだありません: {menus}",
+    "why_recommend": "お客様がスタイルのおすすめを望んでいます。どんな雰囲気にしたいか伺い、その言葉に合うものをメニューから二つか三つ選んでおすすめします。お客様が選んだら、その名前を {field} の欄に記録し直します。{menus}",
+    "why_missing": "まだ記録されていません",
+    "why_not_verified": "ご本人確認ができていません",
+    "why_agree_stale": "了承のあとで予約、時間、スタイリストが変わりました。変わった内容にもう一度了承をいただく必要があります",
+    "why_agree_taken": "了承した時間が空いていません",
+    "why_not_working": "{name}は{weekday}曜日は出勤していません",
+    "why_past": "すでに過ぎた時間です",
+    "why_hours": "{name}の勤務時間（{open}〜{close}）の外です",
+    "why_taken": "{name}はその時間にほかの予約があります",
+    "why_no_designer": "スタイリストが決まっていません",
+    "why_none_free": "その時間に空いているスタイリストはいません",
+    "why_not_active": "この予約はすでに {status} の状態なので変更できません",
+    "cancel_agree_open": "この予約を本当にキャンセルするかお客様に一度確かめ、お客様がそうだと言ったらその言葉を cancel_agree に記録します: {line}",
+    "need": "お客様が残りのことを伝えたくない、あとで伝えると言ったら、なぜ必要か、それがないと先に進めないことを伝えます: {items}",
+    "need_item": "{label}（{id}）: {need}",
+    "reply_foreign": "回答にほかの言語の文字が混ざっています（{words}）。日本語だけで書き直します。"
+  }
+}

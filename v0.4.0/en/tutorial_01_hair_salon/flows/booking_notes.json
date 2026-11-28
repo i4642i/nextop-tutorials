@@ -1,0 +1,22 @@
+{
+  "blocks": [
+    {"id": "load_visit", "type": "function", "function": "load_visit"},
+    {"id": "nuri", "type": "worker", "worker": "summarizer"},
+    {"id": "duri", "type": "worker", "worker": "stylist"},
+    {"id": "mail_designer", "type": "function", "function": "mail_designer"}
+  ],
+  "lines": [
+    {"from": "load_visit.visit", "to": "nuri"},
+    {"from": "load_visit.visit", "to": "duri"},
+    {"from": "nuri.summary", "to": "duri"},
+    {"from": "load_visit.visit", "to": "mail_designer"},
+    {"from": "nuri.summary", "to": "mail_designer"},
+    {"from": "duri.prep", "to": "mail_designer"}
+  ],
+  "layout": {
+    "load_visit": {"x": 40, "y": 140},
+    "nuri": {"x": 300, "y": 60},
+    "duri": {"x": 560, "y": 140},
+    "mail_designer": {"x": 820, "y": 140}
+  }
+}

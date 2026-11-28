@@ -1,0 +1,8 @@
+.env
+runs/
+__pycache__/
+workers/*/knowledge_index/
+workers/*/knowledge_index.lock
+~$*
+.venv/
+video/

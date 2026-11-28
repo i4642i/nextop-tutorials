@@ -1,0 +1,20 @@
+{
+  "name": "news",
+  "description": "4社に関するニュース記事。1記事1ファイル（タイトル、日付、ページのURL、本文）で、会社名のタグ付き",
+  "lifetime": "project",
+  "expire_after": "7d",
+  "shares": [
+    {
+      "from": "collector",
+      "to": [
+        "analyst"
+      ]
+    },
+    {
+      "from": "analyst",
+      "to": [
+        "mail_outlook"
+      ]
+    }
+  ]
+}

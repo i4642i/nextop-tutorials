@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Willow Hair Studio booking</title>
+<style>
+  :root { --bg: #f4f6f8; --me: #2f6fd6; --bot: #ffffff; --fg: #1d2633; --muted: #6b7684; --line: #d9dee5; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font-family: system-ui, sans-serif;
+         height: 100dvh; display: flex; flex-direction: column; }
+  header { padding: 14px 16px; background: #fff; border-bottom: 1px solid var(--line); }
+  header b { font-size: 1.05rem; }
+  header div { color: var(--muted); font-size: .85rem; margin-top: 2px; }
+  #log { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px;
+         max-width: 720px; width: 100%; margin: 0 auto; }
+  .msg { max-width: 80%; padding: 10px 13px; border-radius: 14px; white-space: pre-wrap; line-height: 1.5; }
+  .user { align-self: flex-end; background: var(--me); color: #fff; border-bottom-right-radius: 4px; }
+  .assistant { align-self: flex-start; background: var(--bot); border: 1px solid var(--line); border-bottom-left-radius: 4px; }
+  .wait { color: var(--muted); font-style: italic; }
+  /* the input row lines up with the chat column (#log, 720px): wide screens get side padding, the button sits at
+     the column's right edge; narrow screens use the full width */
+  form { display: flex; gap: 8px; background: #fff; border-top: 1px solid var(--line);
+         padding: 12px max(16px, calc((100% - 720px) / 2 + 16px)); }
+  textarea { flex: 1; resize: none; height: 46px; padding: 11px; border: 1px solid var(--line); border-radius: 10px;
+             font: inherit; }
+  button { padding: 0 18px; border: 0; border-radius: 10px; background: var(--me); color: #fff; font: inherit; }
+  button:disabled { opacity: .5; }
+  #end { float: right; padding: 6px 12px; background: #fff; color: var(--me); border: 1px solid var(--me); }
+</style>
+</head>
+<body>
+<header><b>Willow Hair Studio booking</b><button id="end" type="button">End chat</button><div>Riley, our AI front desk, is here to help.</div></header>
+<div id="log"></div>
+<form id="f">
+  <textarea id="t" placeholder="Type a message" autofocus></textarea>
+  <button id="b">Send</button>
+</form>
+<script>
+const log = document.getElementById("log"), t = document.getElementById("t"), b = document.getElementById("b");
+const history = [];
+// the customer id: the subject of every message of this chat, so the worker sees only this customer's notes and
+// checklist answers (file servers customers and consult); without browser storage it lasts until the page reloads
+let customer = "c-" + Math.random().toString(36).slice(2, 10);
+try {   // one id per browser: the customer's own notes are found again next time
+  customer = localStorage.getItem("salon_customer") || customer;
+  localStorage.setItem("salon_customer", customer);
+} catch (e) {}
+function add(role, text, cls) {
+  const d = document.createElement("div");
+  d.className = "msg " + role + (cls ? " " + cls : "");
+  d.textContent = text;
+  log.appendChild(d);
+  log.scrollTop = log.scrollHeight;
+  return d;
+}
+const hello = "Hi, this is Willow Hair Studio! How can I help you today?";
+add("assistant", hello);
+// the end of the chat: the server deletes this chat's consult and identity rows (flow chat_end), the page starts again
+document.getElementById("end").addEventListener("click", async () => {
+  if (b.disabled) return;
+  b.disabled = true;
+  try { await fetch("/api/end", {method: "POST", headers: {"Content-Type": "application/json"},
+                                 body: JSON.stringify({customer})}); } catch (e) {}
+  history.length = 0; log.textContent = ""; add("assistant", "The chat has ended. Thank you for visiting!"); add("assistant", hello);
+  b.disabled = false;
+});
+async function send(e) {
+  e.preventDefault();
+  const message = t.value.trim();
+  if (!message || b.disabled) return;
+  t.value = ""; b.disabled = true;
+  add("user", message);
+  const wait = add("assistant", "Writing an answer…", "wait");
+  try {
+    const r = await fetch("/api/chat", {method: "POST", headers: {"Content-Type": "application/json"},
+                                        body: JSON.stringify({message, history, customer})});
+    const out = await r.json();
+    wait.remove();
+    if (out.error) { add("assistant", out.error); }
+    else {
+      add("assistant", out.answer);
+      history.push({role: "user", content: message}, {role: "assistant", content: out.answer});
+    }
+  } catch (err) {
+    wait.remove();
+    add("assistant", "The connection was lost. Please send it again in a moment.");
+  }
+  b.disabled = false; t.focus();
+}
+document.getElementById("f").addEventListener("submit", send);
+t.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing) send(e); });
+</script>
+</body>
+</html>

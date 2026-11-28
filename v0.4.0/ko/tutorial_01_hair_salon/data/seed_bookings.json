@@ -1,0 +1,14 @@
+{
+  "_note": "Existing bookings. nth_workday: 1 = the designer's first working day from tomorrow, 2 = the second, ...; styles: menu names of salon.json, one per service",
+  "bookings": [
+    {"designer": "jisu",    "nth_workday": 1, "time": "10:00", "services": ["perm"],   "styles": ["C컬펌"], "name": "김하늘", "phone": "010-0000-1001"},
+    {"designer": "jisu",    "nth_workday": 1, "time": "14:00", "services": ["cut"],    "styles": ["투블럭"],  "name": "이도윤", "phone": "010-0000-1002"},
+    {"designer": "jisu",    "nth_workday": 2, "time": "11:00", "services": ["color"],  "styles": ["전체 염색"],   "name": "박서윤", "phone": "010-0000-1003"},
+    {"designer": "minho",   "nth_workday": 1, "time": "11:00", "services": ["color"],  "styles": ["뿌리 염색"], "name": "최지안", "phone": "010-0000-1004"},
+    {"designer": "minho",   "nth_workday": 1, "time": "16:00", "services": ["cut"],    "styles": ["댄디컷"], "name": "정우진", "phone": "010-0000-1005"},
+    {"designer": "minho",   "nth_workday": 2, "time": "13:00", "services": ["perm"],   "styles": ["다운펌"],  "name": "한서아", "phone": "010-0000-1006"},
+    {"designer": "seoyeon", "nth_workday": 1, "time": "10:00", "services": ["cut"],    "styles": ["투블럭"],  "name": "오민재", "phone": "010-0000-1007"},
+    {"designer": "seoyeon", "nth_workday": 1, "time": "13:00", "services": ["clinic"], "styles": ["클리닉"],   "name": "윤채원", "phone": "010-0000-1008"},
+    {"designer": "seoyeon", "nth_workday": 2, "time": "15:00", "services": ["cut", "clinic"], "styles": ["레이어드 장발", "클리닉"], "name": "강지호", "phone": "010-0000-1009"}
+  ]
+}

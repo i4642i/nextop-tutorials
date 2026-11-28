@@ -1,0 +1,57 @@
+PDF の分類: attention_is_all_you_need.pdf（15 ページ）
+本文 43 · 表 4 · 図 2
+
+[本文] 43
+  1. （見出しなし）（1 ページ）· 173 文字
+  2. Attention Is All You Need（1 ページ）· 397 文字
+  3. Abstract（1 ページ）· 2216 文字
+  4. 1 Introduction（2 ページ）· 1904 文字
+  5. 2 Background（2 ページ）· 1812 文字
+  6. 3 Model Architecture（2 ページ）· 489 文字
+  7. 3 Model Architecture（3 ページ）· 260 文字
+  8. 3.1 Encoder and Decoder Stacks（3 ページ）· 1316 文字
+  9. 3.2 Attention（3 ページ）· 201 文字
+  10. 3.2 Attention（4 ページ）· 49 文字
+  11. 3.2 Attention（4 ページ）· 268 文字
+  12. 3.2.1 Scaled Dot-Product Attention（4 ページ）· 1468 文字
+  13. 3.2.2 Multi-Head Attention（4 ページ）· 638 文字
+  14. 3.2.2 Multi-Head Attention（5 ページ）· 713 文字
+  15. 3.2.3 Applications of Attention in our Model（5 ページ）· 1168 文字
+  16. 3.3 Position-wise Feed-Forward Networks（5 ページ）· 587 文字
+  17. 3.4 Embeddings and Softmax（5 ページ）· 501 文字
+  18. 3.4 Embeddings and Softmax（6 ページ）· 285 文字
+  19. 3.5 Positional Encoding（6 ページ）· 1333 文字
+  20. 4 Why Self-Attention（6 ページ）· 1522 文字
+  21. 4 Why Self-Attention（7 ページ）· 1662 文字
+  22. 5 Training（7 ページ）· 72 文字
+  23. 5.1 Training Data and Batching（7 ページ）· 625 文字
+  24. 5.2 Hardware and Schedule（7 ページ）· 427 文字
+  25. 5.3 Optimizer（7 ページ）· 376 文字
+  26. 5.4 Regularization（7 ページ）· 57 文字
+  27. 5.4 Regularization（8 ページ）· 192 文字
+  28. 5.4 Regularization（8 ページ）· 492 文字
+  29. 6 Results（8 ページ）· 11 文字
+  30. 6.1 Machine Translation（8 ページ）· 1668 文字
+  31. 6.2 Model Variations（8 ページ）· 280 文字
+  32. 6.2 Model Variations（9 ページ）· 323 文字
+  33. 6.2 Model Variations（9 ページ）· 974 文字
+  34. 6.3 English Constituency Parsing（9 ページ）· 1100 文字
+  35. 6.3 English Constituency Parsing（10 ページ）· 108 文字
+  36. 6.3 English Constituency Parsing（10 ページ）· 556 文字
+  37. 7 Conclusion（10 ページ）· 1212 文字
+  38. References（10 ページ）· 569 文字
+  39. References（11 ページ）· 3195 文字
+  40. References（12 ページ）· 3197 文字
+  41. References（13 ページ）· 379 文字
+  42. References（14 ページ）· 103 文字
+  43. References（15 ページ）· 170 文字
+
+[表] 4
+  1. Table 1: Maximum path lengths, per-layer complexity and minimum number of sequential operations for different layer types. n is the sequence length, d is the representation dimension, k is the kernel size of convolutions and r the size of the neighborhood in restricted self-attention.（6 ページ）· 6 行 × 4 列 · 列: Layer Type | Complexity per Layer | Sequential | Maximum Path Length
+  2. Table 2: The Transformer achieves better BLEU scores than previous state-of-the-art models on the English-to-German and English-to-French newstest2014 tests at a fraction of the training cost.（8 ページ）· 13 行 × 5 列 · 列:  | BLEU |  | Training Cost (FLOPs) | 
+  3. Table 3: Variations on the Transformer architecture. Unlisted values are identical to those of the base model. All metrics are on the English-to-German translation development set, newstest2013. Listed perplexities are per-wordpiece, according to our byte-pair encoding, and should not be compared to per-word perplexities.（9 ページ）· 26 行 × 13 列 · 列:  |  |  |  |  |  |  |  |  | train | PPL | BLEU | params
+  4. Table 4: The Transformer generalizes well to English constituency parsing (Results are on Section 23 of WSJ)（10 ページ）· 13 行 × 3 列 · 列: Parser | Training | WSJ 23 F1
+
+[図] 2
+  1. Figure 1: The Transformer - model architecture.（3 ページ）· 911×1343 ピクセル
+  2. Figure 2: (left) Scaled Dot-Product Attention. (right) Multi-Head Attention consists of several attention layers running in parallel.（4 ページ）· 1216×769 ピクセル

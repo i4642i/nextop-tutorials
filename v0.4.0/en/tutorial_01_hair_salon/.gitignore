@@ -1,0 +1,13 @@
+.env
+/runs/
+/bookings/
+/memos/
+/outbox/
+/schedule.html
+/.booking.lock
+__pycache__/
+.pytest_cache/
+.venv/
+workers/*/knowledge_index/
+workers/*/knowledge_index.lock
+file_servers/*/store/

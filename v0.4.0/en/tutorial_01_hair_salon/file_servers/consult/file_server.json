@@ -1,0 +1,27 @@
+{
+  "name": "consult",
+  "description": "What was recorded during the consultation: the customer's requests (purpose_<id>, in progress or done) and the checklist answers (one row per item, close to the customer's words). Writing the same item again changes that row, and the old value stays in its history. Each customer sees only their own rows; the flow chat_end deletes them when the chat ends, and rows left over are deleted after one day",
+  "lifetime": "project",
+  "expire_after": "1d",
+  "access": {
+    "reception": {
+      "write": true,
+      "read": "subject",
+      "show": 2
+    },
+    "close_chat": {
+      "read": "subject",
+      "delete": true
+    },
+    "person:owner": {
+      "read": "all",
+      "delete": true
+    }
+  },
+  "shares": [
+    {
+      "from": "reception",
+      "to": []
+    }
+  ]
+}

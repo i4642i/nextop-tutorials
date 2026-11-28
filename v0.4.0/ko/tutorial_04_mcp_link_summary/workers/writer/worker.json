@@ -1,0 +1,29 @@
+{
+  "id": "writer",
+  "name": "가람",
+  "title": "정리 담당",
+  "model": "gpt-5.4-mini",
+  "tools": [
+    "time__get_current_time",
+    "filesystem__write_file"
+  ],
+  "outputs": [
+    {
+      "name": "report",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "저장한 파일 이름. 요청의 report_file을 그대로 쓰세요."
+          },
+          "headline": {
+            "type": "string",
+            "description": "요약 전체를 한국어 한 문장(40자 안팎)으로 쓰세요. 메일 제목에 들어갑니다."
+          }
+        },
+        "required": ["file", "headline"]
+      }
+    }
+  ]
+}

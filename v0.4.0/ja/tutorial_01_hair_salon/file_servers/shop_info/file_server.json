@@ -1,0 +1,13 @@
+{
+  "name": "shop_info",
+  "description": "サロン案内: メニュー、スタイリスト、営業時間、アクセス、キャンセル、お支払い",
+  "lifetime": "project",
+  "shares": [
+    {
+      "from": "documents",
+      "to": [
+        "reception"
+      ]
+    }
+  ]
+}

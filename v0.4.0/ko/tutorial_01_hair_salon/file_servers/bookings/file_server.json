@@ -1,0 +1,35 @@
+{
+  "name": "bookings",
+  "description": "가게의 예약 기록: 예약마다 한 줄(날짜, 시간, 디자이너, 시술, 가격, 상태, 성함, 휴대폰 번호). 상태는 pending(승인 대기), confirmed(확정), declined(디자이너가 거절), cancelled(취소)입니다. 예약 담당의 도구와 흐름의 함수가 읽고 씁니다. 예약 담당의 모델은 이 서버를 직접 보지 못하고(공통 도구 없음, 입력에 없음), 도구가 본인 확인(성함과 휴대폰 번호가 맞음)이 된 손님의 예약만 알려 줍니다",
+  "lifetime": "project",
+  "access": {
+    "reception": {
+      "read": "all",
+      "write": true,
+      "show": 1
+    },
+    "decide_booking": {
+      "read": "all",
+      "write": true
+    },
+    "seed_bookings": {
+      "read": "all",
+      "write": true
+    },
+    "load_visit": {
+      "read": "all"
+    },
+    "person:owner": {
+      "read": "all",
+      "write": true,
+      "delete": true
+    }
+  },
+  "shares": [
+    {
+      "from": "reception",
+      "to": []
+    }
+  ],
+  "per_subject": false
+}

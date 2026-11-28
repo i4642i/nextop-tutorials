@@ -1,0 +1,47 @@
+{
+  "id": "stylist",
+  "name": "Sam",
+  "title": "Service prep",
+  "model": "gpt-5.4-mini",
+  "outputs": [
+    {
+      "name": "prep",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "ready": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 4,
+            "description": "what to prepare before the customer arrives"
+          },
+          "ask_first": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "maxItems": 3,
+            "description": "what the designer should ask in the first minutes"
+          },
+          "care": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 3,
+            "description": "points to be careful about (none: [])"
+          }
+        },
+        "required": [
+          "ready",
+          "ask_first",
+          "care"
+        ]
+      }
+    }
+  ]
+}

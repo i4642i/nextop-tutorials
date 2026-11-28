@@ -1,0 +1,13 @@
+{
+  "type": "table",
+  "extensions": ["json"],
+  "fields": [
+    {"name": "item", "type": "choice", "from": "checklists.json",
+     "description": "what this row records: purpose_<id> for a purpose (purpose_info, purpose_booking, purpose_my_booking, purpose_change, purpose_other), else the id of a checklist item the step notice names"},
+    {"name": "words", "type": "text", "description": "what the customer said, close to their words (for a purpose: what they asked; for an item with choices or a form: the value in that form)"},
+    {"name": "style", "type": "choice", "from": "salon.json", "many": true,
+     "description": "only on the style row: the menu names the customer chose, one per service, comma separated, exactly as the step notice lists them; 추천 when the customer does not know and wants a suggestion"},
+    {"name": "state", "type": "choice", "of": ["open", "done"], "description": "only on a purpose row: open while it is being handled, done when it is finished"}
+  ],
+  "key": "item"
+}

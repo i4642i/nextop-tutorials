@@ -1,0 +1,102 @@
+{
+  "id": "analyst",
+  "name": "다온",
+  "title": "주가 전망 담당",
+  "model": "gpt-5.4-mini",
+  "steps": [
+    {
+      "id": "scan",
+      "name": "회사별 뉴스 훑기",
+      "inputs": ["brief", "coverage"],
+      "file_servers": ["news"]
+    },
+    {
+      "id": "judge",
+      "name": "회사별 전망",
+      "for_each": "scan.companies",
+      "inputs": ["brief", "coverage"],
+      "file_servers": ["news"],
+      "report": ["scan"]
+    }
+  ],
+  "outputs": [
+    {
+      "name": "scan",
+      "schema": {
+        "type": "object",
+        "step": "scan",
+        "properties": {
+          "companies": {
+            "type": "array",
+            "description": "회사마다 하나씩, 계획(brief)의 순서대로 쓰세요.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "type": "string",
+                  "key": true,
+                  "description": "계획에 있는 회사 이름을 그대로 쓰세요."
+                },
+                "focus": {
+                  "type": "string",
+                  "description": "그 회사의 최근 기사가 가장 많이 다루는 일을 한 문장으로 쓰세요."
+                }
+              },
+              "required": ["company", "focus"]
+            }
+          }
+        },
+        "required": ["companies"]
+      }
+    },
+    {
+      "name": "outlook",
+      "schema": {
+        "type": "object",
+        "step": "judge",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "회사마다 하나씩 쓰세요.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "company": {
+                  "type": "string",
+                  "key": true,
+                  "description": "전망을 쓰는 회사의 이름을 그대로 쓰세요."
+                },
+                "direction": {
+                  "type": "string",
+                  "enum": ["up", "flat", "down"],
+                  "description": "다음 거래일의 방향을 고르세요. up은 오름, flat은 보합, down은 내림입니다."
+                },
+                "reasons": {
+                  "type": "array",
+                  "maxItems": 3,
+                  "description": "방향을 뒷받침하는 이유를 쓰세요.",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "point": {
+                        "type": "string",
+                        "description": "이유를 한 문장으로 쓰세요."
+                      },
+                      "source": {
+                        "type": "string",
+                        "description": "이유를 보여 주는 기사 문단의 주소(fs://news/003#1.2처럼 #이 붙은 주소)를 쓰세요."
+                      }
+                    },
+                    "required": ["point", "source"]
+                  }
+                }
+              },
+              "required": ["company", "direction", "reasons"]
+            }
+          }
+        },
+        "required": ["items"]
+      }
+    }
+  ]
+}

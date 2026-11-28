@@ -1,0 +1,65 @@
+{
+  "note": "The four companies. query: what the search tool looks for. listed false (a company with no share price): the outlook is news mood only. search.include_domains: US financial news sites in English (the search keeps to them).",
+  "companies": [
+    {
+      "name": "NVIDIA",
+      "ticker": "NVDA (Nasdaq)",
+      "listed": true,
+      "query": "NVIDIA NVDA stock news"
+    },
+    {
+      "name": "Apple",
+      "ticker": "AAPL (Nasdaq)",
+      "listed": true,
+      "query": "Apple AAPL stock news iPhone"
+    },
+    {
+      "name": "Micron",
+      "ticker": "MU (Nasdaq)",
+      "listed": true,
+      "query": "Micron MU stock news memory HBM"
+    },
+    {
+      "name": "SpaceX",
+      "ticker": "SPCX (Nasdaq)",
+      "listed": true,
+      "query": "SpaceX SPCX stock Starship Starlink"
+    }
+  ],
+  "search": {
+    "days": 3,
+    "max_results": 6,
+    "include_domains": [
+      "reuters.com",
+      "apnews.com",
+      "cnbc.com",
+      "bloomberg.com",
+      "wsj.com",
+      "marketwatch.com",
+      "barrons.com",
+      "finance.yahoo.com",
+      "investors.com",
+      "businessinsider.com",
+      "fool.com",
+      "forbes.com",
+      "fortune.com",
+      "nasdaq.com",
+      "axios.com",
+      "theverge.com",
+      "techcrunch.com",
+      "nytimes.com",
+      "washingtonpost.com",
+      "latimes.com"
+    ],
+    "exclude_domains": [
+      "instagram.com",
+      "facebook.com",
+      "x.com",
+      "twitter.com",
+      "youtube.com",
+      "reddit.com",
+      "tiktok.com",
+      "threads.net"
+    ]
+  }
+}

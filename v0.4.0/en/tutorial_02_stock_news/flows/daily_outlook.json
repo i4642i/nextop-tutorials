@@ -1,0 +1,23 @@
+{
+  "blocks": [
+    {"id": "plan", "type": "function", "function": "plan"},
+    {"id": "collector", "type": "worker", "worker": "collector"},
+    {"id": "analyst", "type": "worker", "worker": "analyst"},
+    {"id": "mail_outlook", "type": "function", "function": "mail_outlook"}
+  ],
+  "lines": [
+    {"from": "plan.brief", "to": "collector"},
+    {"from": "plan.brief", "to": "analyst"},
+    {"from": "collector.coverage", "to": "analyst"},
+    {"from": "plan.brief", "to": "mail_outlook"},
+    {"from": "collector.coverage", "to": "mail_outlook"},
+    {"from": "analyst.scan", "to": "mail_outlook"},
+    {"from": "analyst.outlook", "to": "mail_outlook"}
+  ],
+  "layout": {
+    "plan": {"x": 40, "y": 140},
+    "collector": {"x": 300, "y": 60},
+    "analyst": {"x": 560, "y": 140},
+    "mail_outlook": {"x": 820, "y": 140}
+  }
+}

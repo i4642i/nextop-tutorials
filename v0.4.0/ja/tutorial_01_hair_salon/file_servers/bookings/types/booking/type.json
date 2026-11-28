@@ -1,0 +1,97 @@
+{
+  "type": "table",
+  "extensions": [
+    "json"
+  ],
+  "fields": [
+    {
+      "name": "booking",
+      "type": "text",
+      "description": "the booking id (date-time-designer of the first booking; it stays when the booking is changed)"
+    },
+    {
+      "name": "status",
+      "type": "choice",
+      "of": [
+        "pending",
+        "confirmed",
+        "declined",
+        "cancelled"
+      ],
+      "description": "pending: the slot is held and the designer has not answered; confirmed; declined by the designer (the slot is free); cancelled by the customer (the slot is free)"
+    },
+    {
+      "name": "date",
+      "type": "date",
+      "description": "the day, YYYY-MM-DD"
+    },
+    {
+      "name": "time",
+      "type": "text",
+      "description": "the start, HH:MM"
+    },
+    {
+      "name": "designer",
+      "type": "choice",
+      "of": [
+        "takahashi",
+        "nakamura",
+        "kobayashi"
+      ],
+      "description": "the designer's id"
+    },
+    {
+      "name": "designer_name",
+      "type": "text",
+      "description": "the designer's name"
+    },
+    {
+      "name": "services",
+      "type": "list",
+      "description": "the service ids"
+    },
+    {
+      "name": "service_labels",
+      "type": "list",
+      "description": "the service names"
+    },
+    {
+      "name": "styles",
+      "type": "list",
+      "description": "the menu style names, one per service, in the order of services"
+    },
+    {
+      "name": "price",
+      "type": "number",
+      "description": "the price in yen, tax included"
+    },
+    {
+      "name": "minutes",
+      "type": "number",
+      "description": "how long the visit takes"
+    },
+    {
+      "name": "name",
+      "type": "text",
+      "description": "the customer's name"
+    },
+    {
+      "name": "phone",
+      "type": "phone",
+      "description": "the customer's mobile number (a Japanese number; the key is E.164, +819012345678)",
+      "country": "JP"
+    },
+    {
+      "name": "answers",
+      "type": "text",
+      "description": "the checklist answers of the chosen services, one line each (label: words)"
+    },
+    {
+      "name": "booked_at",
+      "type": "text",
+      "description": "when the booking was made or last changed (YYYY-MM-DD HH:MM)"
+    }
+  ],
+  "key": "booking",
+  "tools": []
+}

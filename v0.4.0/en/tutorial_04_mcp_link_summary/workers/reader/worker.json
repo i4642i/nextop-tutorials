@@ -1,0 +1,61 @@
+{
+  "id": "reader",
+  "name": "Avery",
+  "title": "Reader",
+  "model": "gpt-5.4-mini",
+  "tools": [
+    "fetch__fetch"
+  ],
+  "outputs": [
+    {
+      "name": "notes",
+      "schema": {
+        "type": "object",
+        "properties": {
+          "pages": {
+            "type": "array",
+            "description": "Write one entry for every page of the request (request), in the same order.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "type": "integer",
+                  "description": "Write the page number (page) of the request (request.pages) exactly as it is. Do not write the address; the program finds it by the number."
+                },
+                "read": {
+                  "type": "boolean",
+                  "description": "true when you read the page, false when you could not."
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Write the page's title exactly as the page has it. Empty when you could not read it."
+                },
+                "points": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Write 3 key points of the page, one English sentence each. Empty when you could not read it."
+                },
+                "problem": {
+                  "type": "string",
+                  "description": "When you could not read the page, write why in one sentence. Empty when you read it."
+                }
+              },
+              "required": [
+                "page",
+                "read",
+                "title",
+                "points",
+                "problem"
+              ]
+            }
+          }
+        },
+        "required": [
+          "pages"
+        ]
+      }
+    }
+  ]
+}
